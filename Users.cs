@@ -24,7 +24,7 @@ namespace IMS
 
         private void Users_Load(object sender, EventArgs e)
         {
-            MainClass.disable(leftPanel);
+            MainClass.disable_reset(leftPanel);
            
         }
         public override void addBtn_Click(object sender, EventArgs e)
@@ -129,13 +129,13 @@ namespace IMS
             {
                 edit = 1;
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                userID = Convert.ToInt32(row.Cells["userIDGV"].Value?.ToString());
-                nameTB.Text = row.Cells["NameGV"].Value?.ToString();
-                usernameTB.Text = row.Cells["UsernameGV"].Value?.ToString();
-                passwordTB.Text = row.Cells["PasswordGV"].Value?.ToString();
-                phoneTB.Text = row.Cells["PhoneGV"].Value?.ToString();
-                emailTB.Text = row.Cells["EmailGV"].Value?.ToString();
-                statusDD.SelectedItem = row.Cells["StatusGV"].Value?.ToString();
+                userID = Convert.ToInt32(row.Cells["userIDGV"].Value.ToString());
+                nameTB.Text = row.Cells["NameGV"].Value.ToString();
+                usernameTB.Text = row.Cells["UsernameGV"].Value.ToString();
+                passwordTB.Text = row.Cells["PasswordGV"].Value.ToString();
+                phoneTB.Text = row.Cells["PhoneGV"].Value.ToString();
+                emailTB.Text = row.Cells["EmailGV"].Value.ToString();
+                statusDD.SelectedItem = row.Cells["StatusGV"].Value.ToString();
                 MainClass.disable(leftPanel);
 
             }

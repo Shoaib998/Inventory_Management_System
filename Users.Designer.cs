@@ -62,6 +62,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
+            // searchTB
+            // 
+            this.searchTB.Size = new System.Drawing.Size(122, 23);
+            // 
             // leftPanel
             // 
             this.leftPanel.Controls.Add(this.statusDD);
@@ -358,6 +362,7 @@
             // 
             // statusDD
             // 
+            this.statusDD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.statusDD.FormattingEnabled = true;
             this.statusDD.Items.AddRange(new object[] {
             "Active",

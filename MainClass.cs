@@ -160,6 +160,11 @@ namespace IMS
                 }
             }
         }
+
+        internal static void ShowMSG(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

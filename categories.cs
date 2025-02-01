@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IMS
 {
@@ -61,8 +61,8 @@ namespace IMS
                 if (edit == 0) // Code for SAVE Operation
                 {
                     insertion i = new insertion();
-                    i.insertUser(nameTB.Text, usernameTB.Text, passwordTB.Text, phoneTB.Text, emailTB.Text, stat);
-                    r.showUsers(dataGridView1, userIDGV, NameGV, UsernameGV, PasswordGV, EmailGV, PhoneGV, StatusGV);
+                    i.insertCat(catogorynameTB.Text, stat);
+                    r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
                     MainClass.disable_reset(leftPanel);
                 }
                 else if (edit == 1) // Cde For UPDATE Operation
@@ -71,8 +71,8 @@ namespace IMS
                     if (dr == DialogResult.Yes)
                     {
                         updation u = new updation();
-                        u.updateUser(userID, nameTB.Text, usernameTB.Text, passwordTB.Text, phoneTB.Text, emailTB.Text, stat);
-                        r.showUsers(dataGridView1, userIDGV, NameGV, UsernameGV, PasswordGV, EmailGV, PhoneGV, StatusGV);
+                        u.updateCat(catID, catogorynameTB.Text, stat);
+                        r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
                         MainClass.disable_reset(leftPanel);
                     }
 
@@ -82,41 +82,47 @@ namespace IMS
 
         public override void deleteBtn_Click(object sender, EventArgs e)
         {
-
+            if (edit == 1)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure, you want to delete the record?", "Qusetion...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    deletion d = new deletion();
+                    d.delete(catID, "st_deleteCategory", "@id");
+                    r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
+                }
+            }
         }
 
         public override void searchTB_TextChanged(object sender, EventArgs e)
         {
-
+            //if (searchTB.Text != "")
+            //{
+            //    r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV, searchTB.Text);
+            //}
+            //else
+            //{
+            //    r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
+            //}
         }
 
         public override void viewBtn_Click(object sender, EventArgs e)
         {
-
+            r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
         }
 
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                edit = 1;
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                catID = Convert.ToInt32(row.Cells["catIDGV"].Value.ToString());
+                catogorynameTB.Text = row.Cells["NameGV"].Value.ToString();
+                activeDD.SelectedItem = row.Cells["StatusGV"].Value.ToString();
+                MainClass.disable(leftPanel);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+        }
     }
 }

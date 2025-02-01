@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.categoryBtn = new System.Windows.Forms.Button();
             this.salesBtn = new System.Windows.Forms.Button();
             this.purchaseInvBtn = new System.Windows.Forms.Button();
             this.stockBtn = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.categoryBtn, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.salesBtn, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.purchaseInvBtn, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.stockBtn, 2, 0);
@@ -73,6 +75,22 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 481);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // categoryBtn
+            // 
+            this.categoryBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.categoryBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.categoryBtn.FlatAppearance.BorderSize = 2;
+            this.categoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.categoryBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryBtn.Location = new System.Drawing.Point(3, 99);
+            this.categoryBtn.Name = "categoryBtn";
+            this.categoryBtn.Size = new System.Drawing.Size(148, 90);
+            this.categoryBtn.TabIndex = 5;
+            this.categoryBtn.Text = "Categories";
+            this.categoryBtn.UseVisualStyleBackColor = true;
+            this.categoryBtn.Click += new System.EventHandler(this.categoryBtn_Click);
             // 
             // salesBtn
             // 
@@ -133,6 +151,7 @@
             this.productBtn.TabIndex = 1;
             this.productBtn.Text = "Products";
             this.productBtn.UseVisualStyleBackColor = true;
+            this.productBtn.Click += new System.EventHandler(this.productBtn_Click);
             // 
             // userBtn
             // 
@@ -172,5 +191,6 @@
         private System.Windows.Forms.Button purchaseInvBtn;
         private System.Windows.Forms.Button stockBtn;
         private System.Windows.Forms.Button productBtn;
+        private System.Windows.Forms.Button categoryBtn;
     }
 }

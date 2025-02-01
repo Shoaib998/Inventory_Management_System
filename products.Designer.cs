@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.categoryDD = new System.Windows.Forms.ComboBox();
             this.categoryLbl = new System.Windows.Forms.Label();
-            this.emailTB = new System.Windows.Forms.TextBox();
-            this.emailLbl = new System.Windows.Forms.Label();
             this.priceTB = new System.Windows.Forms.TextBox();
             this.priceLbl = new System.Windows.Forms.Label();
             this.expiryLbl = new System.Windows.Forms.Label();
@@ -41,12 +42,21 @@
             this.productnameLbl = new System.Windows.Forms.Label();
             this.barcodeerrorLbl = new System.Windows.Forms.Label();
             this.priceerrorLbl = new System.Windows.Forms.Label();
-            this.emailerrorLbl = new System.Windows.Forms.Label();
             this.categoryerrorLbl = new System.Windows.Forms.Label();
             this.productnameerrorLbl = new System.Windows.Forms.Label();
             this.expiryPicker = new System.Windows.Forms.DateTimePicker();
             this.expiryerrorLbl = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.proIDGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proNameGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcodeGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expiryGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catIDGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.leftPanel.SuspendLayout();
+            this.rightPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // searchTB
@@ -58,8 +68,6 @@
             this.leftPanel.Controls.Add(this.expiryPicker);
             this.leftPanel.Controls.Add(this.categoryDD);
             this.leftPanel.Controls.Add(this.categoryLbl);
-            this.leftPanel.Controls.Add(this.emailTB);
-            this.leftPanel.Controls.Add(this.emailLbl);
             this.leftPanel.Controls.Add(this.priceTB);
             this.leftPanel.Controls.Add(this.priceLbl);
             this.leftPanel.Controls.Add(this.expiryLbl);
@@ -69,7 +77,6 @@
             this.leftPanel.Controls.Add(this.productnameLbl);
             this.leftPanel.Controls.Add(this.barcodeerrorLbl);
             this.leftPanel.Controls.Add(this.priceerrorLbl);
-            this.leftPanel.Controls.Add(this.emailerrorLbl);
             this.leftPanel.Controls.Add(this.categoryerrorLbl);
             this.leftPanel.Controls.Add(this.productnameerrorLbl);
             this.leftPanel.Controls.Add(this.expiryerrorLbl);
@@ -78,7 +85,6 @@
             this.leftPanel.Controls.SetChildIndex(this.productnameerrorLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.panel3, 0);
             this.leftPanel.Controls.SetChildIndex(this.categoryerrorLbl, 0);
-            this.leftPanel.Controls.SetChildIndex(this.emailerrorLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.priceerrorLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.barcodeerrorLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.productnameLbl, 0);
@@ -88,15 +94,15 @@
             this.leftPanel.Controls.SetChildIndex(this.expiryLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.priceLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.priceTB, 0);
-            this.leftPanel.Controls.SetChildIndex(this.emailLbl, 0);
-            this.leftPanel.Controls.SetChildIndex(this.emailTB, 0);
             this.leftPanel.Controls.SetChildIndex(this.categoryLbl, 0);
             this.leftPanel.Controls.SetChildIndex(this.categoryDD, 0);
             this.leftPanel.Controls.SetChildIndex(this.expiryPicker, 0);
             // 
             // rightPanel
             // 
+            this.rightPanel.Controls.Add(this.dataGridView1);
             this.rightPanel.Size = new System.Drawing.Size(754, 515);
+            this.rightPanel.Controls.SetChildIndex(this.dataGridView1, 0);
             // 
             // categoryDD
             // 
@@ -114,23 +120,6 @@
             this.categoryLbl.Size = new System.Drawing.Size(55, 15);
             this.categoryLbl.TabIndex = 36;
             this.categoryLbl.Text = "Category";
-            // 
-            // emailTB
-            // 
-            this.emailTB.Location = new System.Drawing.Point(10, 377);
-            this.emailTB.MaxLength = 50;
-            this.emailTB.Name = "emailTB";
-            this.emailTB.Size = new System.Drawing.Size(232, 23);
-            this.emailTB.TabIndex = 30;
-            // 
-            // emailLbl
-            // 
-            this.emailLbl.AutoSize = true;
-            this.emailLbl.Location = new System.Drawing.Point(7, 359);
-            this.emailLbl.Name = "emailLbl";
-            this.emailLbl.Size = new System.Drawing.Size(44, 15);
-            this.emailLbl.TabIndex = 29;
-            this.emailLbl.Text = "E-mail ";
             // 
             // priceTB
             // 
@@ -214,17 +203,6 @@
             this.priceerrorLbl.Text = "*";
             this.priceerrorLbl.Visible = false;
             // 
-            // emailerrorLbl
-            // 
-            this.emailerrorLbl.AutoSize = true;
-            this.emailerrorLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailerrorLbl.Location = new System.Drawing.Point(47, 359);
-            this.emailerrorLbl.Name = "emailerrorLbl";
-            this.emailerrorLbl.Size = new System.Drawing.Size(17, 21);
-            this.emailerrorLbl.TabIndex = 35;
-            this.emailerrorLbl.Text = "*";
-            this.emailerrorLbl.Visible = false;
-            // 
             // categoryerrorLbl
             // 
             this.categoryerrorLbl.AutoSize = true;
@@ -240,7 +218,7 @@
             // 
             this.productnameerrorLbl.AutoSize = true;
             this.productnameerrorLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productnameerrorLbl.Location = new System.Drawing.Point(90, 84);
+            this.productnameerrorLbl.Location = new System.Drawing.Point(90, 83);
             this.productnameerrorLbl.Name = "productnameerrorLbl";
             this.productnameerrorLbl.Size = new System.Drawing.Size(17, 21);
             this.productnameerrorLbl.TabIndex = 39;
@@ -267,6 +245,95 @@
             this.expiryerrorLbl.Text = "*";
             this.expiryerrorLbl.Visible = false;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.proIDGV,
+            this.proNameGV,
+            this.barcodeGV,
+            this.expiryGV,
+            this.priceGV,
+            this.catIDGV,
+            this.catGV});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 98);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(754, 417);
+            this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // proIDGV
+            // 
+            this.proIDGV.HeaderText = "Product ID";
+            this.proIDGV.Name = "proIDGV";
+            this.proIDGV.ReadOnly = true;
+            this.proIDGV.Visible = false;
+            // 
+            // proNameGV
+            // 
+            this.proNameGV.HeaderText = "Product";
+            this.proNameGV.Name = "proNameGV";
+            this.proNameGV.ReadOnly = true;
+            // 
+            // barcodeGV
+            // 
+            this.barcodeGV.HeaderText = "Barcode";
+            this.barcodeGV.Name = "barcodeGV";
+            this.barcodeGV.ReadOnly = true;
+            // 
+            // expiryGV
+            // 
+            this.expiryGV.HeaderText = "Expiry Date";
+            this.expiryGV.Name = "expiryGV";
+            this.expiryGV.ReadOnly = true;
+            // 
+            // priceGV
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.priceGV.DefaultCellStyle = dataGridViewCellStyle2;
+            this.priceGV.HeaderText = "Price";
+            this.priceGV.Name = "priceGV";
+            this.priceGV.ReadOnly = true;
+            // 
+            // catIDGV
+            // 
+            this.catIDGV.HeaderText = "Category ID";
+            this.catIDGV.Name = "catIDGV";
+            this.catIDGV.ReadOnly = true;
+            this.catIDGV.Visible = false;
+            // 
+            // catGV
+            // 
+            this.catGV.HeaderText = "Category";
+            this.catGV.Name = "catGV";
+            this.catGV.ReadOnly = true;
+            // 
             // products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -277,6 +344,8 @@
             this.Load += new System.EventHandler(this.products_Load);
             this.leftPanel.ResumeLayout(false);
             this.leftPanel.PerformLayout();
+            this.rightPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -285,8 +354,6 @@
 
         private System.Windows.Forms.ComboBox categoryDD;
         private System.Windows.Forms.Label categoryLbl;
-        private System.Windows.Forms.TextBox emailTB;
-        private System.Windows.Forms.Label emailLbl;
         private System.Windows.Forms.TextBox priceTB;
         private System.Windows.Forms.Label priceLbl;
         private System.Windows.Forms.Label expiryLbl;
@@ -296,10 +363,17 @@
         private System.Windows.Forms.Label productnameLbl;
         private System.Windows.Forms.Label barcodeerrorLbl;
         private System.Windows.Forms.Label priceerrorLbl;
-        private System.Windows.Forms.Label emailerrorLbl;
         private System.Windows.Forms.Label categoryerrorLbl;
         private System.Windows.Forms.Label productnameerrorLbl;
         private System.Windows.Forms.DateTimePicker expiryPicker;
         private System.Windows.Forms.Label expiryerrorLbl;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proIDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proNameGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcodeGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn catIDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn catGV;
     }
 }
