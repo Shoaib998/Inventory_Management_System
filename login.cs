@@ -24,8 +24,34 @@ namespace IMS
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            HomeScreen obj = new HomeScreen();
-            MainClass.showWindow(obj, this, MDI.ActiveForm);
+            if (uNameTB.Text == "") { nameerrorLbl.Visible = true; } else { nameerrorLbl.Visible = false; }
+            if (passwordTB.Text == "") { passworderrorLbl.Visible = true; } else { passworderrorLbl.Visible = false; }
+            if (nameerrorLbl.Visible || passworderrorLbl.Visible)
+            {
+                MainClass.ShowMSG("Fields with * is mendatory", "Stop", "Error"); // Error is the type of msg
+            }
+            else
+            {
+                if (retrieval.getUserDetails(uNameTB.Text, passwordTB.Text))
+                {
+                    HomeScreen hm = new HomeScreen();
+                    MainClass.showWindow(hm, this, MDI.ActiveForm);
+                }
+                else
+                {
+
+                }         
+            }                  
+        }
+
+        private void uNameTB_TextChanged(object sender, EventArgs e)
+        {
+            if (uNameTB.Text == "") { nameerrorLbl.Visible = true; } else { nameerrorLbl.Visible = false; }
+        }
+
+        private void passwordTB_TextChanged(object sender, EventArgs e)
+        {
+            if (passwordTB.Text == "") { passworderrorLbl.Visible = true; } else { passworderrorLbl.Visible = false; }
         }
     }
 }

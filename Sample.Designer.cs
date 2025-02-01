@@ -30,10 +30,10 @@
         {
             this.leftPanel = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.welcomeTB = new System.Windows.Forms.Label();
+            this.welcomeLbl = new System.Windows.Forms.Label();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.userTB = new System.Windows.Forms.Label();
+            this.userLbl = new System.Windows.Forms.Label();
             this.leftPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.rightPanel.SuspendLayout();
@@ -55,7 +55,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.panel3.Controls.Add(this.welcomeTB);
+            this.panel3.Controls.Add(this.welcomeLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.ForeColor = System.Drawing.Color.White;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -63,16 +63,16 @@
             this.panel3.Size = new System.Drawing.Size(250, 45);
             this.panel3.TabIndex = 0;
             // 
-            // welcomeTB
+            // welcomeLbl
             // 
-            this.welcomeTB.Dock = System.Windows.Forms.DockStyle.Right;
-            this.welcomeTB.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeTB.Location = new System.Drawing.Point(75, 0);
-            this.welcomeTB.Name = "welcomeTB";
-            this.welcomeTB.Size = new System.Drawing.Size(175, 45);
-            this.welcomeTB.TabIndex = 1;
-            this.welcomeTB.Text = "Welcome";
-            this.welcomeTB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.welcomeLbl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.welcomeLbl.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLbl.Location = new System.Drawing.Point(75, 0);
+            this.welcomeLbl.Name = "welcomeLbl";
+            this.welcomeLbl.Size = new System.Drawing.Size(175, 45);
+            this.welcomeLbl.TabIndex = 1;
+            this.welcomeLbl.Text = "Welcome";
+            this.welcomeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // rightPanel
             // 
@@ -86,23 +86,23 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.userTB);
+            this.panel1.Controls.Add(this.userLbl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(763, 45);
             this.panel1.TabIndex = 0;
             // 
-            // userTB
+            // userLbl
             // 
-            this.userTB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.userTB.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTB.Location = new System.Drawing.Point(0, 0);
-            this.userTB.Name = "userTB";
-            this.userTB.Size = new System.Drawing.Size(629, 45);
-            this.userTB.TabIndex = 1;
-            this.userTB.Text = "User";
-            this.userTB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.userLbl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.userLbl.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userLbl.Location = new System.Drawing.Point(0, 0);
+            this.userLbl.Name = "userLbl";
+            this.userLbl.Size = new System.Drawing.Size(629, 45);
+            this.userLbl.TabIndex = 1;
+            this.userLbl.Text = "User";
+            this.userLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Sample
             // 
@@ -128,8 +128,8 @@
         protected System.Windows.Forms.Panel leftPanel;
         protected System.Windows.Forms.Panel rightPanel;
         protected System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label welcomeTB;
+        private System.Windows.Forms.Label welcomeLbl;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label userTB;
+        protected System.Windows.Forms.Label userLbl;
     }
 }

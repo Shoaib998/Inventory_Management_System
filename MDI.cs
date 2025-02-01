@@ -50,5 +50,13 @@ namespace IMS
             settings set = new settings();
             MainClass.showWindow(set, this);
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MDI.logoutToolStripMenuItem.Enabled = false;
+            login lgin = new login();
+            MainClass.showWindow(lgin, this);
+        
+        }
     }
 }

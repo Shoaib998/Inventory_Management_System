@@ -32,6 +32,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.myMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingToolStripMenuItem,
+            logoutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -69,6 +71,15 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            logoutToolStripMenuItem.Enabled = false;
+            logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            logoutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            logoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            logoutToolStripMenuItem.Text = "Logout";
+            logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // MDI
             // 
@@ -91,11 +102,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip myMenu;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip myMenu;
+        public static System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     }
 }
 

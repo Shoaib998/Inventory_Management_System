@@ -176,6 +176,7 @@
             this.ClientSize = new System.Drawing.Size(1022, 526);
             this.Name = "HomeScreen";
             this.Text = "Home Screen";
+            this.Load += new System.EventHandler(this.HomeScreen_Load);
             this.leftPanel.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

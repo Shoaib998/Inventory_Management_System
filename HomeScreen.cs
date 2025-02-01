@@ -34,5 +34,11 @@ namespace IMS
             products p = new products();
             MainClass.showWindow(p, this, MDI.ActiveForm);
         }
+
+        private void HomeScreen_Load(object sender, EventArgs e)
+        {
+            MDI.logoutToolStripMenuItem.Enabled = true;
+            userLbl.Text = retrieval.EMP_NAME;       
+        }
     }
 }

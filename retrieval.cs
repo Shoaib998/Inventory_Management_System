@@ -118,6 +118,67 @@ namespace IMS
                 MainClass.ShowMSG("Unable to load categories data", "Error", "Error");
             }
         }
+        public static int USER_ID
+        {
+            get;
+            private set;
+        }
+        public static string EMP_NAME
+        {
+            get;
+            private set;
+        }
+        private static string user_name=null, pass_word=null;
+        private static bool checkLogin;
+        public static bool getUserDetails(string username, string password)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_getUserDetails", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                MainClass.con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    checkLogin = true;
+                    while (dr.Read())
+                    {
+                        USER_ID = Convert.ToInt32(dr["ID"].ToString());
+                        EMP_NAME = dr["Name"].ToString();
+                        user_name = dr["User Name"].ToString();
+                        pass_word = dr["Password"].ToString();
+                    }
 
+                }
+                else
+                {
+                    checkLogin = false;
+                    if(username != null && password != null)
+                    {
+                        if (user_name != null && pass_word == password)
+                        {
+                            MainClass.ShowMSG("Invalid username", "Error", "Error");
+                        }
+                        else if (user_name == null && pass_word != password)
+                        {
+                            MainClass.ShowMSG("Invalid password", "Error", "Error");
+                        }
+                        else if (user_name != null && pass_word != password)
+                        {
+                            MainClass.ShowMSG("Invalid User Name and Password", "Error", "Error");
+                        }
+                    }
+                }
+                MainClass.con.Close();
+            }
+            catch (Exception)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG("Uable to login", "Error", "Error");
+            }
+            return checkLogin;
+        }
     }
 }
