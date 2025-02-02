@@ -40,5 +40,11 @@ namespace IMS
             MDI.logoutToolStripMenuItem.Enabled = true;
             userLbl.Text = retrieval.EMP_NAME;       
         }
+
+        private void supplierBtn_Click(object sender, EventArgs e)
+        {
+            Supplier s = new Supplier();
+            MainClass.showWindow(s, this, MDI.ActiveForm);
+        }
     }
 }

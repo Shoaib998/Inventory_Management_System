@@ -180,5 +180,31 @@ namespace IMS
             }
             return checkLogin;
         }
+        public void showSuppliers(DataGridView gv, DataGridViewColumn suppIDGV, DataGridViewColumn companyNameGV, DataGridViewColumn personNameGV,
+            DataGridViewColumn phone1GV, DataGridViewColumn phone2GV, DataGridViewColumn addressGV, DataGridViewColumn ntnGV, DataGridViewColumn StatusGV)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_getSupplierData", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                suppIDGV.DataPropertyName = dt.Columns["ID"].ToString();
+                companyNameGV.DataPropertyName = dt.Columns["Company"].ToString();
+                personNameGV.DataPropertyName = dt.Columns["Person Name"].ToString();
+                phone1GV.DataPropertyName = dt.Columns["Phone 1"].ToString();
+                phone2GV.DataPropertyName = dt.Columns["Phone 2"].ToString();
+                addressGV.DataPropertyName = dt.Columns["Address"].ToString();
+                ntnGV.DataPropertyName = dt.Columns["NTN #"].ToString();
+                StatusGV.DataPropertyName = dt.Columns["Status"].ToString();
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load Suppliers data", "Error", "Error");
+            }
+        }
     }
 }

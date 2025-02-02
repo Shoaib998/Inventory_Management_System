@@ -78,6 +78,14 @@ namespace IMS
                     if (dr == DialogResult.Yes)
                     {
                         updation u = new updation();
+                        if (statusDD.SelectedIndex == 0)
+                        {
+                            stat = 1;
+                        }
+                        else if (statusDD.SelectedIndex == 1)
+                        {
+                            stat = 0;
+                        }
                         u.updateUser(userID, nameTB.Text, usernameTB.Text, passwordTB.Text, phoneTB.Text, emailTB.Text, stat);
                         r.showUsers(dataGridView1, userIDGV, NameGV, UsernameGV, PasswordGV, EmailGV, PhoneGV, StatusGV);
                         MainClass.disable_reset(leftPanel);

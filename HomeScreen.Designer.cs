@@ -35,6 +35,7 @@
             this.stockBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.userBtn = new System.Windows.Forms.Button();
+            this.supplierBtn = new System.Windows.Forms.Button();
             this.leftPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -58,6 +59,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.supplierBtn, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.categoryBtn, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.salesBtn, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.purchaseInvBtn, 3, 0);
@@ -169,6 +171,22 @@
             this.userBtn.UseVisualStyleBackColor = true;
             this.userBtn.Click += new System.EventHandler(this.userBtn_Click);
             // 
+            // supplierBtn
+            // 
+            this.supplierBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.supplierBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.supplierBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.supplierBtn.FlatAppearance.BorderSize = 2;
+            this.supplierBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.supplierBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplierBtn.Location = new System.Drawing.Point(157, 99);
+            this.supplierBtn.Name = "supplierBtn";
+            this.supplierBtn.Size = new System.Drawing.Size(148, 90);
+            this.supplierBtn.TabIndex = 6;
+            this.supplierBtn.Text = "Supplier";
+            this.supplierBtn.UseVisualStyleBackColor = true;
+            this.supplierBtn.Click += new System.EventHandler(this.supplierBtn_Click);
+            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -193,5 +211,6 @@
         private System.Windows.Forms.Button stockBtn;
         private System.Windows.Forms.Button productBtn;
         private System.Windows.Forms.Button categoryBtn;
+        private System.Windows.Forms.Button supplierBtn;
     }
 }

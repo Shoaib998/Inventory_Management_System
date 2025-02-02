@@ -71,6 +71,14 @@ namespace IMS
                     if (dr == DialogResult.Yes)
                     {
                         updation u = new updation();
+                        if (activeDD.SelectedIndex == 0)
+                        {
+                            stat = 1;
+                        }
+                        else if (activeDD.SelectedIndex == 1)
+                        {
+                            stat = 0;
+                        }
                         u.updateCat(catID, catogorynameTB.Text, stat);
                         r.showCategories(dataGridView1, catIDGV, NameGV, StatusGV);
                         MainClass.disable_reset(leftPanel);
