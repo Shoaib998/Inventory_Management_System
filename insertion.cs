@@ -5,6 +5,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Transactions;
+
+
 
 namespace IMS
 {
@@ -119,6 +123,75 @@ namespace IMS
             {
                 MainClass.con.Close();
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
+            }
+        }
+        private Int64 PurchaseInvoiceID;
+        public Int64 insertPurchaseInvoice(DateTime date,int doneBy, int suppID)
+        {
+            try
+            {
+               
+                    SqlCommand cmd = new SqlCommand("st_insertPurchaseInvoice", MainClass.con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@doneBy", doneBy);
+                    cmd.Parameters.AddWithValue("@suppID", suppID);
+                    MainClass.con.Open();
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "st_getLastPurchaseID";
+                    cmd.Parameters.Clear();
+                    PurchaseInvoiceID = Convert.ToInt64(cmd.ExecuteScalar());
+
+                    MainClass.con.Close();
+            }
+            catch (Exception ex)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG(ex.Message, "Error...", "Error");
+            }
+            return PurchaseInvoiceID;
+        }
+        int pidCount;
+        public int insertPurchaseInvoiceDetails(Int64 purID, int proID, int proquan, float totprice)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_insertPurchaseInvoiceDetails", MainClass.con);
+                cmd.CommandType= CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@purchaseID",purID);
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@proquan", proquan);
+                cmd.Parameters.AddWithValue("@totprice", totprice);
+                MainClass.con.Open();
+                pidCount = cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+
+            }
+            catch (Exception)
+            {
+
+                MainClass.con.Close();
+            }
+            return pidCount;
+        }
+        public void insertStock(int proID, int proquan)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_insertStock", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@quan", proquan);
+            
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+
+            }
+            catch (Exception)
+            {
+
+                MainClass.con.Close();
             }
         }
     }

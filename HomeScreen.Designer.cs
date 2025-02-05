@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.supplierBtn = new System.Windows.Forms.Button();
             this.categoryBtn = new System.Windows.Forms.Button();
             this.salesBtn = new System.Windows.Forms.Button();
             this.purchaseInvBtn = new System.Windows.Forms.Button();
             this.stockBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.userBtn = new System.Windows.Forms.Button();
-            this.supplierBtn = new System.Windows.Forms.Button();
             this.leftPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -77,6 +77,22 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 481);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // supplierBtn
+            // 
+            this.supplierBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.supplierBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.supplierBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.supplierBtn.FlatAppearance.BorderSize = 2;
+            this.supplierBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.supplierBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplierBtn.Location = new System.Drawing.Point(157, 99);
+            this.supplierBtn.Name = "supplierBtn";
+            this.supplierBtn.Size = new System.Drawing.Size(148, 90);
+            this.supplierBtn.TabIndex = 6;
+            this.supplierBtn.Text = "Supplier";
+            this.supplierBtn.UseVisualStyleBackColor = true;
+            this.supplierBtn.Click += new System.EventHandler(this.supplierBtn_Click);
             // 
             // categoryBtn
             // 
@@ -123,6 +139,7 @@
             this.purchaseInvBtn.TabIndex = 3;
             this.purchaseInvBtn.Text = "Purchase Invoice";
             this.purchaseInvBtn.UseVisualStyleBackColor = true;
+            this.purchaseInvBtn.Click += new System.EventHandler(this.purchaseInvBtn_Click);
             // 
             // stockBtn
             // 
@@ -170,22 +187,6 @@
             this.userBtn.Text = "Users";
             this.userBtn.UseVisualStyleBackColor = true;
             this.userBtn.Click += new System.EventHandler(this.userBtn_Click);
-            // 
-            // supplierBtn
-            // 
-            this.supplierBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.supplierBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.supplierBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.supplierBtn.FlatAppearance.BorderSize = 2;
-            this.supplierBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.supplierBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.supplierBtn.Location = new System.Drawing.Point(157, 99);
-            this.supplierBtn.Name = "supplierBtn";
-            this.supplierBtn.Size = new System.Drawing.Size(148, 90);
-            this.supplierBtn.TabIndex = 6;
-            this.supplierBtn.Text = "Supplier";
-            this.supplierBtn.UseVisualStyleBackColor = true;
-            this.supplierBtn.Click += new System.EventHandler(this.supplierBtn_Click);
             // 
             // HomeScreen
             // 

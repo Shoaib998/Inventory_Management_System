@@ -67,13 +67,13 @@ namespace IMS
                 MainClass.ShowMSG("Unable to load categories data","Error","Error");
             }
         }
-        public void getCategoriesList(string proc, ComboBox cb, string displayMember, string valueMember)
+        public void getList(string proc, ComboBox cb, string displayMember, string valueMember)
         {
             try
             {
-                cb.Items.Clear();
-                //cb.DataSource = null;
-                //cb.Items.Insert(0, "Select...");
+                
+                cb.DataSource = null;
+
                 SqlCommand cmd = new SqlCommand(proc, MainClass.con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -84,13 +84,41 @@ namespace IMS
                 dt.Rows.InsertAt(dr, 0);
                 cb.DisplayMember = displayMember;
                 cb.ValueMember = valueMember;
-                //cb.Items.Insert(0, "Select...");
+         
                 cb.DataSource = dt;
                 
             }
             catch (Exception)
             {
                 throw;
+            }
+        }
+        public void getListWithTwoParameters(string proc, ComboBox cb, string displayMember, string valueMember, string param1, object val1, string param2, object val2)
+        {
+            try
+            {
+              
+                cb.DataSource = null;
+
+                SqlCommand cmd = new SqlCommand(proc, MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue(param1, val1);
+                cmd.Parameters.AddWithValue(param2, val2);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                DataRow dr = dt.NewRow();
+                dr.ItemArray = new object[] { 0, "Select..." };
+                dt.Rows.InsertAt(dr, 0);
+                cb.DisplayMember = displayMember;
+                cb.ValueMember = valueMember;
+
+                cb.DataSource = dt;
+
+            }
+            catch (Exception ex)
+            {
+            
             }
         }
         public void showProducts(DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn expiryGV, DataGridViewColumn catGV, DataGridViewColumn priceGV, DataGridViewColumn barcodeGV, DataGridViewColumn catIDGV)
@@ -204,6 +232,84 @@ namespace IMS
             catch (Exception)
             {
                 MainClass.ShowMSG("Unable to load Suppliers data", "Error", "Error");
+            }
+        }
+        private string[] productsData = new string[4];
+        public string[] getProductsWRTBarcode(string barcode)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_getProductByBarcode", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@barcode", barcode);
+                MainClass.con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if(dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        productsData[0] = dr[0].ToString();
+                        productsData[1] = dr[1].ToString();
+                        productsData[2] = dr[2].ToString();
+                        productsData[3] = dr[3].ToString();
+                    }
+                }
+                else
+                {
+                    //MainClass.ShowMSG("No product Available.", "Error", "Error");
+                }
+                MainClass.con.Close();
+            }
+            catch (Exception)
+            {
+                MainClass.con.Close();
+                throw;
+            }
+            return productsData;
+        }
+        private object productStockCount = 0;
+        public object getProductQuantity(int proID)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_getProductQuantity", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+               
+                MainClass.con.Open();
+                productStockCount = cmd.ExecuteScalar();
+                MainClass.con.Close();
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            return productStockCount;
+        }
+        public void showPurchaseInvoiceDetails(Int64 pid, DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn quantityGV, DataGridViewColumn perunitpriceGV, DataGridViewColumn totalGV)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_getPurchaseInvoiceDetails", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pid", pid);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                proIDGV.DataPropertyName = dt.Columns["Product ID"].ToString();
+                proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
+                quantityGV.DataPropertyName = dt.Columns["Quantity"].ToString();
+                perunitpriceGV.DataPropertyName = dt.Columns["Per Unit Price"].ToString();
+                totalGV.DataPropertyName = dt.Columns["Total Price"].ToString();
+        
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load Invoice Details data", "Error", "Error");
             }
         }
     }

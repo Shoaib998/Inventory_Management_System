@@ -126,5 +126,25 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
+        public void updateStock(int proID, int proquan)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_updatetStock", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@quan", proquan);
+
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+
+            }
+            catch (Exception)
+            {
+
+                MainClass.con.Close();
+            }
+        }
     }
 }

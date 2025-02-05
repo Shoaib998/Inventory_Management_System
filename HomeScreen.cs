@@ -46,5 +46,11 @@ namespace IMS
             Supplier s = new Supplier();
             MainClass.showWindow(s, this, MDI.ActiveForm);
         }
+
+        private void purchaseInvBtn_Click(object sender, EventArgs e)
+        {
+            PurchaseInvoice pi = new PurchaseInvoice();
+            MainClass.showWindow(pi, this, MDI.ActiveForm);
+        }
     }
 }

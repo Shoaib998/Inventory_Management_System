@@ -26,7 +26,7 @@ namespace IMS
             {
                 if (serverTB.Text != "" && dbTB.Text != "")
                 {
-                    s = "Data Source=" + serverTB.Text + ";Initial Catalog=" + dbTB.Text + ";Integrated Security=true;";
+                    s = "Data Source=" + serverTB.Text + ";Initial Catalog=" + dbTB.Text + ";Integrated Security=true;MultipleActiveResultSets=true;";
                     File.WriteAllText(path+"\\connect", s);
                     DialogResult dr = MessageBox.Show("Settings Save Successfully...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dr == DialogResult.OK)
@@ -44,7 +44,7 @@ namespace IMS
             {
                 if (serverTB.Text != "" && dbTB.Text != "" && useridTB.Text != "" && passwordTB.Text != "")
                 {
-                    s = "Data Source=" + serverTB.Text + ";Initial Catalog=" + dbTB.Text + ";User Id=" + useridTB.Text + ";Password=" + passwordTB.Text +";";
+                    s = "Data Source=" + serverTB.Text + ";Initial Catalog=" + dbTB.Text + ";User Id=" + useridTB.Text + ";Password=" + passwordTB.Text + ";MultipleActiveResultSets=true;";
                     File.WriteAllText(path+"\\connect", s);
                     DialogResult dr = MessageBox.Show("Settings Save Successfully...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dr == DialogResult.OK)

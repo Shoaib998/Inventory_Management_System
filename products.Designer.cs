@@ -106,6 +106,7 @@
             // 
             // categoryDD
             // 
+            this.categoryDD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryDD.FormattingEnabled = true;
             this.categoryDD.Location = new System.Drawing.Point(10, 277);
             this.categoryDD.Name = "categoryDD";
