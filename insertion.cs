@@ -57,7 +57,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void insertProduct(string product, string barcode, float price, int catID, DateTime? expiry= null)
+        public void insertProduct(string product, string barcode, int catID, DateTime? expiry= null)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace IMS
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@name", product);
                 cmd.Parameters.AddWithValue("@barcode", barcode);
-                cmd.Parameters.AddWithValue("@price", price);
+                
                 if (expiry == null )
                 {
                     cmd.Parameters.AddWithValue("@expiry", DBNull.Value);
@@ -192,6 +192,54 @@ namespace IMS
             {
 
                 MainClass.con.Close();
+            }
+        }
+        public void insertDeletedItems(Int64 pid, int proid, int quan, int userid, DateTime date)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_insertDeletedItemsPI", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pi", pid);
+                cmd.Parameters.AddWithValue("@userID", userid);
+                cmd.Parameters.AddWithValue("@proID", proid);
+                cmd.Parameters.AddWithValue("@quan", quan);
+                cmd.Parameters.AddWithValue("@date", date);
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+            }
+            catch (Exception ex)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG(ex.Message, "Error...", "Error");
+            }
+        }
+        public void insertProductPrice(int proID, float buyingAmount, float? sellingAmount = null)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_insertProductPrice", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@bp", buyingAmount);
+                if (sellingAmount == null)
+                {
+                    cmd.Parameters.AddWithValue("@sp", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@sp", sellingAmount);
+                }
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+            }
+            catch (Exception ex)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
     }

@@ -223,15 +223,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.Button saveBtn;
-        private System.Windows.Forms.Button editBtn;
-        private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.GroupBox searchGB;
+        protected System.Windows.Forms.Panel panel2;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        protected System.Windows.Forms.Button deleteBtn;
+        protected System.Windows.Forms.Button saveBtn;
+        protected System.Windows.Forms.Button editBtn;
+        protected System.Windows.Forms.Button addBtn;
+        protected System.Windows.Forms.GroupBox searchGB;
         protected System.Windows.Forms.TextBox searchTB;
-        private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.Button viewBtn;
+        protected System.Windows.Forms.Button backBtn;
+        protected System.Windows.Forms.Button viewBtn;
     }
 }

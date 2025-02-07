@@ -116,12 +116,12 @@ namespace IMS
                 cb.DataSource = dt;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             
             }
         }
-        public void showProducts(DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn expiryGV, DataGridViewColumn catGV, DataGridViewColumn priceGV, DataGridViewColumn barcodeGV, DataGridViewColumn catIDGV)
+        public void showProducts(DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn expiryGV, DataGridViewColumn catGV, DataGridViewColumn barcodeGV, DataGridViewColumn catIDGV)
         {
             try
             {
@@ -136,7 +136,6 @@ namespace IMS
                 proNameGV.DataPropertyName = dt.Columns["Product"].ToString();
                 barcodeGV.DataPropertyName = dt.Columns["Barcode"].ToString();
                 expiryGV.DataPropertyName = dt.Columns["Expiry"].ToString();
-                priceGV.DataPropertyName = dt.Columns["Price"].ToString();
                 catGV.DataPropertyName = dt.Columns["Category"].ToString();
                 catIDGV.DataPropertyName = dt.Columns["Category ID"].ToString();
                 gv.DataSource = dt;
@@ -234,7 +233,7 @@ namespace IMS
                 MainClass.ShowMSG("Unable to load Suppliers data", "Error", "Error");
             }
         }
-        private string[] productsData = new string[4];
+        private string[] productsData = new string[3];
         public string[] getProductsWRTBarcode(string barcode)
         {
             try
@@ -251,7 +250,6 @@ namespace IMS
                         productsData[0] = dr[0].ToString();
                         productsData[1] = dr[1].ToString();
                         productsData[2] = dr[2].ToString();
-                        productsData[3] = dr[3].ToString();
                     }
                 }
                 else
@@ -287,7 +285,7 @@ namespace IMS
             }
             return productStockCount;
         }
-        public void showPurchaseInvoiceDetails(Int64 pid, DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn quantityGV, DataGridViewColumn perunitpriceGV, DataGridViewColumn totalGV)
+        public void showPurchaseInvoiceDetails(Int64 pid, DataGridView gv,DataGridViewColumn mPIDGV, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn quantityGV, DataGridViewColumn perunitpriceGV, DataGridViewColumn totalGV)
         {
             try
             {
@@ -298,7 +296,7 @@ namespace IMS
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
+                mPIDGV.DataPropertyName = dt.Columns["mPID"].ToString();
                 proIDGV.DataPropertyName = dt.Columns["Product ID"].ToString();
                 proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
                 quantityGV.DataPropertyName = dt.Columns["Quantity"].ToString();
@@ -310,6 +308,53 @@ namespace IMS
             catch (Exception)
             {
                 MainClass.ShowMSG("Unable to load Invoice Details data", "Error", "Error");
+            }
+        }
+        public void showStockDetails(DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn barcodeGV,
+          DataGridViewColumn expiryGV, DataGridViewColumn priceGV, DataGridViewColumn catGV, DataGridViewColumn availStGV,DataGridViewColumn totalAmountGV, DataGridViewColumn StatusGV)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_getAllStock", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                proIDGV.DataPropertyName = dt.Columns["ID"].ToString();
+                proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
+                barcodeGV.DataPropertyName = dt.Columns["Barcode"].ToString();
+                expiryGV.DataPropertyName = dt.Columns["Expiry Date"].ToString();
+                priceGV.DataPropertyName = dt.Columns["Price"].ToString();
+                catGV.DataPropertyName = dt.Columns["Category"].ToString();
+                availStGV.DataPropertyName = dt.Columns["Available Stock"].ToString();
+                totalAmountGV.DataPropertyName = dt.Columns["Total Amount"].ToString();
+                StatusGV.DataPropertyName = dt.Columns["Status"].ToString();
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load Stock data", "Error", "Error");
+            }
+        }
+        public void showProductWRTCategory(int catID,DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn bpGV)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_getProductsWRTCategory", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@catID", catID);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                proIDGV.DataPropertyName = dt.Columns["Product ID"].ToString();
+                proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
+                bpGV.DataPropertyName = dt.Columns["Buying Price"].ToString();
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load Products data", "Error", "Error");
             }
         }
     }

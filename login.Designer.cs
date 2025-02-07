@@ -78,6 +78,7 @@
             this.uNameTB.Name = "uNameTB";
             this.uNameTB.Size = new System.Drawing.Size(232, 23);
             this.uNameTB.TabIndex = 2;
+            this.uNameTB.Text = "shoaib";
             this.uNameTB.TextChanged += new System.EventHandler(this.uNameTB_TextChanged);
             // 
             // passwordTB
@@ -87,6 +88,7 @@
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.Size = new System.Drawing.Size(232, 23);
             this.passwordTB.TabIndex = 4;
+            this.passwordTB.Text = "123";
             this.passwordTB.UseSystemPasswordChar = true;
             this.passwordTB.TextChanged += new System.EventHandler(this.passwordTB_TextChanged);
             // 

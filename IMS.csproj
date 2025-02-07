@@ -75,6 +75,12 @@
     <Compile Include="MDI.Designer.cs">
       <DependentUpon>MDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductPricing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductPricing.Designer.cs">
+      <DependentUpon>ProductPricing.cs</DependentUpon>
+    </Compile>
     <Compile Include="products.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,12 @@
       <DependentUpon>PurchaseInvoiceDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="retrieval.cs" />
+    <Compile Include="Sales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales.Designer.cs">
+      <DependentUpon>Sales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sample.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +157,9 @@
     <EmbeddedResource Include="MDI.resx">
       <DependentUpon>MDI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductPricing.resx">
+      <DependentUpon>ProductPricing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="products.resx">
       <DependentUpon>products.cs</DependentUpon>
     </EmbeddedResource>
@@ -162,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PurchaseInvoiceDetails.resx">
       <DependentUpon>PurchaseInvoiceDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales.resx">
+      <DependentUpon>Sales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sample.resx">
       <DependentUpon>Sample.cs</DependentUpon>

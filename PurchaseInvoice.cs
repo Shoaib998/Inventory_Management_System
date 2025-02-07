@@ -46,6 +46,7 @@ namespace IMS
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         co += i.insertPurchaseInvoiceDetails(purchaseInvoiceID, Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()), Convert.ToSingle(row.Cells["totalGV"].Value.ToString()));
+                        i.insertProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
                         int q;
                         object ob = r.getProductQuantity(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()));
                         if (ob != null)
@@ -95,51 +96,9 @@ namespace IMS
         }
         string[] prodARR = new string[4];
 
-
-        private void barcodeTB_Validated(object sender, EventArgs e)
-        {
-            //if (barcodeTB.Text != "")
-            //{
-            //    prodARR = r.getProductsWRTBarcode(barcodeTB.Text);
-            //    productID = Convert.ToInt32(prodARR[0]);
-            //    productnameTB.Text = prodARR[1];
-            //    perunitpiceTB.Text = prodARR[2];
-            //    productnameTB.Enabled = false;
-            //    perunitpiceTB.Enabled = false;
-            //}
-            //else
-            //{
-            //    productID = 0;
-            //    productnameTB.Text = "";
-            //    perunitpiceTB.Text = "";
-            //    Array.Clear(prodARR, 0, prodARR.Length);
-            //}
-            //both valedated or text chage work same
-        }
-
         private void barcodeTB_TextChanged_1(object sender, EventArgs e)
         {
-            if (barcodeTB.Text != "")
-            {
-                prodARR = r.getProductsWRTBarcode(barcodeTB.Text);
-                productID = Convert.ToInt32(prodARR[0]);
-                productnameTB.Text = prodARR[1];
-                perunitpiceTB.Text = prodARR[2];
-                string barcode = prodARR[3];
-                productnameTB.Enabled = false;
-                perunitpiceTB.Enabled = false;
-                if (barcode != null)
-                {
-                    quatityTB.Focus();
-                }
-            }
-            else
-            {
-                productID = 0;
-                productnameTB.Text = "";
-                perunitpiceTB.Text = "";
-                Array.Clear(prodARR, 0, prodARR.Length);
-            }
+           
         }
 
         private void quatityTB_TextChanged(object sender, EventArgs e)
@@ -176,6 +135,41 @@ namespace IMS
                     grossamountLbl.Text = gt.ToString();
                     dataGridView1.Rows.Remove(row);
                 }
+            }
+        }
+
+        private void perunitpiceTB_TextChanged(object sender, EventArgs e)
+        {
+            if (perunitpiceTB.Text != "")
+            {
+                if (!rg.Match(perunitpiceTB.Text).Success)
+                {
+                    perunitpiceTB.Text = "";
+                    perunitpiceTB.Focus();
+                }
+            }
+        }
+
+        private void barcodeTB_Validating(object sender, CancelEventArgs e)
+        {
+            if (barcodeTB.Text != "")
+            {
+                prodARR = r.getProductsWRTBarcode(barcodeTB.Text);
+                productID = Convert.ToInt32(prodARR[0]);
+                productnameTB.Text = prodARR[1];
+                string barcode = prodARR[2];
+                productnameTB.Enabled = false;
+                if (barcode != null)
+                {
+                    perunitpiceTB.Focus();
+                }
+            }
+            else
+            {
+                productID = 0;
+                productnameTB.Text = "";
+                perunitpiceTB.Text = "";
+                Array.Clear(prodARR, 0, prodARR.Length);
             }
         }
 

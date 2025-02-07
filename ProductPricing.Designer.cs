@@ -1,6 +1,6 @@
 ﻿namespace IMS
 {
-    partial class Stocks
+    partial class ProductPricing
     {
         /// <summary>
         /// Required designer variable.
@@ -30,16 +30,17 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.categoryDD = new System.Windows.Forms.ComboBox();
+            this.categoryLbl = new System.Windows.Forms.Label();
+            this.categoryerrorLbl = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.selectGV = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.proIDGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proNameGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcodeGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expiryGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.finalGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StatusGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyingPriceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profitMarginGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finalPriceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.leftPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -48,11 +49,11 @@
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(799, 53);
+            this.panel2.Size = new System.Drawing.Size(721, 53);
             // 
             // searchTB
             // 
-            this.searchTB.Size = new System.Drawing.Size(122, 23);
+            this.searchTB.Size = new System.Drawing.Size(109, 23);
             // 
             // backBtn
             // 
@@ -60,14 +61,51 @@
             // 
             // leftPanel
             // 
-            this.leftPanel.Size = new System.Drawing.Size(250, 521);
+            this.leftPanel.Controls.Add(this.categoryDD);
+            this.leftPanel.Controls.Add(this.categoryLbl);
+            this.leftPanel.Controls.Add(this.categoryerrorLbl);
+            this.leftPanel.Size = new System.Drawing.Size(250, 539);
+            this.leftPanel.Controls.SetChildIndex(this.panel3, 0);
+            this.leftPanel.Controls.SetChildIndex(this.categoryerrorLbl, 0);
+            this.leftPanel.Controls.SetChildIndex(this.categoryLbl, 0);
+            this.leftPanel.Controls.SetChildIndex(this.categoryDD, 0);
             // 
             // rightPanel
             // 
             this.rightPanel.Controls.Add(this.dataGridView1);
-            this.rightPanel.Size = new System.Drawing.Size(799, 521);
+            this.rightPanel.Size = new System.Drawing.Size(721, 539);
             this.rightPanel.Controls.SetChildIndex(this.panel2, 0);
             this.rightPanel.Controls.SetChildIndex(this.dataGridView1, 0);
+            // 
+            // categoryDD
+            // 
+            this.categoryDD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryDD.FormattingEnabled = true;
+            this.categoryDD.Location = new System.Drawing.Point(6, 93);
+            this.categoryDD.Name = "categoryDD";
+            this.categoryDD.Size = new System.Drawing.Size(238, 23);
+            this.categoryDD.TabIndex = 40;
+            this.categoryDD.SelectedIndexChanged += new System.EventHandler(this.categoryDD_SelectedIndexChanged);
+            // 
+            // categoryLbl
+            // 
+            this.categoryLbl.AutoSize = true;
+            this.categoryLbl.Location = new System.Drawing.Point(3, 75);
+            this.categoryLbl.Name = "categoryLbl";
+            this.categoryLbl.Size = new System.Drawing.Size(55, 15);
+            this.categoryLbl.TabIndex = 39;
+            this.categoryLbl.Text = "Category";
+            // 
+            // categoryerrorLbl
+            // 
+            this.categoryerrorLbl.AutoSize = true;
+            this.categoryerrorLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryerrorLbl.Location = new System.Drawing.Point(57, 75);
+            this.categoryerrorLbl.Name = "categoryerrorLbl";
+            this.categoryerrorLbl.Size = new System.Drawing.Size(17, 21);
+            this.categoryerrorLbl.TabIndex = 41;
+            this.categoryerrorLbl.Text = "*";
+            this.categoryerrorLbl.Visible = false;
             // 
             // dataGridView1
             // 
@@ -86,15 +124,13 @@
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.selectGV,
             this.proIDGV,
             this.proNameGV,
-            this.quantityGV,
-            this.barcodeGV,
-            this.expiryGV,
-            this.priceGV,
-            this.catGV,
-            this.finalGV,
-            this.StatusGV});
+            this.buyingPriceGV,
+            this.profitMarginGV,
+            this.discountGV,
+            this.finalPriceGV});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -103,79 +139,64 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 98);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(799, 391);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(721, 441);
             this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
+            // 
+            // selectGV
+            // 
+            this.selectGV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.selectGV.HeaderText = "";
+            this.selectGV.Name = "selectGV";
+            this.selectGV.Width = 5;
             // 
             // proIDGV
             // 
             this.proIDGV.HeaderText = "Product ID";
             this.proIDGV.Name = "proIDGV";
-            this.proIDGV.ReadOnly = true;
             this.proIDGV.Visible = false;
             // 
             // proNameGV
             // 
             this.proNameGV.HeaderText = "Product";
             this.proNameGV.Name = "proNameGV";
-            this.proNameGV.ReadOnly = true;
             // 
-            // quantityGV
+            // buyingPriceGV
             // 
-            this.quantityGV.HeaderText = "Quantity";
-            this.quantityGV.Name = "quantityGV";
-            this.quantityGV.ReadOnly = true;
+            this.buyingPriceGV.HeaderText = "Buying Price";
+            this.buyingPriceGV.Name = "buyingPriceGV";
             // 
-            // barcodeGV
+            // profitMarginGV
             // 
-            this.barcodeGV.HeaderText = "Barcode";
-            this.barcodeGV.Name = "barcodeGV";
-            this.barcodeGV.ReadOnly = true;
+            this.profitMarginGV.HeaderText = "Profit Margin %";
+            this.profitMarginGV.Name = "profitMarginGV";
             // 
-            // expiryGV
+            // discountGV
             // 
-            this.expiryGV.HeaderText = "Expiry Date";
-            this.expiryGV.Name = "expiryGV";
-            this.expiryGV.ReadOnly = true;
+            this.discountGV.HeaderText = "Discount %";
+            this.discountGV.Name = "discountGV";
             // 
-            // priceGV
+            // finalPriceGV
             // 
-            this.priceGV.HeaderText = "Price";
-            this.priceGV.Name = "priceGV";
-            this.priceGV.ReadOnly = true;
+            this.finalPriceGV.HeaderText = "Final Selling Price";
+            this.finalPriceGV.Name = "finalPriceGV";
             // 
-            // catGV
-            // 
-            this.catGV.HeaderText = "Category";
-            this.catGV.Name = "catGV";
-            this.catGV.ReadOnly = true;
-            // 
-            // finalGV
-            // 
-            this.finalGV.HeaderText = "Total Amount";
-            this.finalGV.Name = "finalGV";
-            this.finalGV.ReadOnly = true;
-            // 
-            // StatusGV
-            // 
-            this.StatusGV.HeaderText = "Status";
-            this.StatusGV.Name = "StatusGV";
-            this.StatusGV.ReadOnly = true;
-            // 
-            // Stocks
+            // ProductPricing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 521);
-            this.Name = "Stocks";
-            this.Text = "Stocks";
-            this.Load += new System.EventHandler(this.Stocks_Load);
+            this.ClientSize = new System.Drawing.Size(971, 539);
+            this.Name = "ProductPricing";
+            this.Text = "Product Pricing";
             this.leftPanel.ResumeLayout(false);
+            this.leftPanel.PerformLayout();
             this.rightPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -185,15 +206,16 @@
 
         #endregion
 
+        private System.Windows.Forms.ComboBox categoryDD;
+        private System.Windows.Forms.Label categoryLbl;
+        private System.Windows.Forms.Label categoryerrorLbl;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selectGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn proIDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn proNameGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barcodeGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expiryGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn catGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn finalGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StatusGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn buyingPriceGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profitMarginGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discountGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn finalPriceGV;
     }
 }
