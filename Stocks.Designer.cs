@@ -29,14 +29,18 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.proIDGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proNameGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barcodeGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.expiryGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyingPriceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellingPriceGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.catGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.finalGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,18 +95,19 @@
             this.quantityGV,
             this.barcodeGV,
             this.expiryGV,
-            this.priceGV,
+            this.buyingPriceGV,
+            this.sellingPriceGV,
             this.catGV,
             this.finalGV,
             this.StatusGV});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.Location = new System.Drawing.Point(0, 98);
             this.dataGridView1.Name = "dataGridView1";
@@ -143,11 +148,23 @@
             this.expiryGV.Name = "expiryGV";
             this.expiryGV.ReadOnly = true;
             // 
-            // priceGV
+            // buyingPriceGV
             // 
-            this.priceGV.HeaderText = "Price";
-            this.priceGV.Name = "priceGV";
-            this.priceGV.ReadOnly = true;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.buyingPriceGV.DefaultCellStyle = dataGridViewCellStyle2;
+            this.buyingPriceGV.HeaderText = "Buying Price";
+            this.buyingPriceGV.Name = "buyingPriceGV";
+            this.buyingPriceGV.ReadOnly = true;
+            // 
+            // sellingPriceGV
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.sellingPriceGV.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sellingPriceGV.HeaderText = "Selling Price";
+            this.sellingPriceGV.Name = "sellingPriceGV";
+            this.sellingPriceGV.ReadOnly = true;
             // 
             // catGV
             // 
@@ -157,6 +174,9 @@
             // 
             // finalGV
             // 
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.finalGV.DefaultCellStyle = dataGridViewCellStyle4;
             this.finalGV.HeaderText = "Total Amount";
             this.finalGV.Name = "finalGV";
             this.finalGV.ReadOnly = true;
@@ -191,7 +211,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcodeGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn expiryGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn buyingPriceGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellingPriceGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn catGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn finalGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusGV;

@@ -311,7 +311,7 @@ namespace IMS
             }
         }
         public void showStockDetails(DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn barcodeGV,
-          DataGridViewColumn expiryGV, DataGridViewColumn priceGV, DataGridViewColumn catGV, DataGridViewColumn availStGV,DataGridViewColumn totalAmountGV, DataGridViewColumn StatusGV)
+          DataGridViewColumn expiryGV, DataGridViewColumn bpGV, DataGridViewColumn spGV, DataGridViewColumn catGV, DataGridViewColumn availStGV,DataGridViewColumn totalAmountGV, DataGridViewColumn StatusGV)
         {
             try
             {
@@ -325,7 +325,8 @@ namespace IMS
                 proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
                 barcodeGV.DataPropertyName = dt.Columns["Barcode"].ToString();
                 expiryGV.DataPropertyName = dt.Columns["Expiry Date"].ToString();
-                priceGV.DataPropertyName = dt.Columns["Price"].ToString();
+                bpGV.DataPropertyName = dt.Columns["Buying Price"].ToString();
+                spGV.DataPropertyName = dt.Columns["Selling Price"].ToString();
                 catGV.DataPropertyName = dt.Columns["Category"].ToString();
                 availStGV.DataPropertyName = dt.Columns["Available Stock"].ToString();
                 totalAmountGV.DataPropertyName = dt.Columns["Total Amount"].ToString();
@@ -337,7 +338,7 @@ namespace IMS
                 MainClass.ShowMSG("Unable to load Stock data", "Error", "Error");
             }
         }
-        public void showProductWRTCategory(int catID,DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn bpGV)
+        public void showProductWRTCategory(int catID,DataGridView gv, DataGridViewColumn proIDGV, DataGridViewColumn proNameGV, DataGridViewColumn bpGV, DataGridViewColumn spGV, DataGridViewColumn discountGV, DataGridViewColumn profitPercentageGV)
         {
             try
             {
@@ -350,12 +351,41 @@ namespace IMS
                 proIDGV.DataPropertyName = dt.Columns["Product ID"].ToString();
                 proNameGV.DataPropertyName = dt.Columns["Product Name"].ToString();
                 bpGV.DataPropertyName = dt.Columns["Buying Price"].ToString();
+                spGV.DataPropertyName = dt.Columns["Selling Price"].ToString();
+                discountGV.DataPropertyName = dt.Columns["Discount"].ToString();
+                profitPercentageGV.DataPropertyName = dt.Columns["Profit Percentage"].ToString();
                 gv.DataSource = dt;
             }
             catch (Exception)
             {
                 MainClass.ShowMSG("Unable to load Products data", "Error", "Error");
             }
+        }
+        private bool checkPPExistance;
+        public bool checkProductPriceExistance(int proID)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_checkProductPriceExist", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+                MainClass.con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    checkPPExistance = true;
+                }
+                else
+                {
+                    checkPPExistance = false;
+                }
+                MainClass.con.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            return checkPPExistance;
         }
     }
 }

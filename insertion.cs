@@ -216,7 +216,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void insertProductPrice(int proID, float buyingAmount, float? sellingAmount = null)
+        public void insertProductPrice(int proID, float buyingAmount)
         {
             try
             {
@@ -224,14 +224,7 @@ namespace IMS
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@proID", proID);
                 cmd.Parameters.AddWithValue("@bp", buyingAmount);
-                if (sellingAmount == null)
-                {
-                    cmd.Parameters.AddWithValue("@sp", DBNull.Value);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@sp", sellingAmount);
-                }
+               
                 MainClass.con.Open();
                 cmd.ExecuteNonQuery();
                 MainClass.con.Close();

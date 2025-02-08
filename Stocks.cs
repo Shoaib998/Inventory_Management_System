@@ -19,11 +19,11 @@ namespace IMS
         retrieval r = new retrieval();
         private void Stocks_Load(object sender, EventArgs e)
         {
-            //base.addBtn.Visible = false;
-            //base.saveBtn.Visible = false;
-            //base.editBtn.Visible = false;
-            //base.deleteBtn.Visible = false;
-            
+            base.addBtn.Enabled = false;
+            base.saveBtn.Enabled = false;
+            base.editBtn.Enabled = false;
+            base.deleteBtn.Enabled = false;
+
         }
         public override void addBtn_Click(object sender, EventArgs e)
         {
@@ -52,7 +52,7 @@ namespace IMS
 
         public override void viewBtn_Click(object sender, EventArgs e)
         {
-            r.showStockDetails(dataGridView1,proIDGV,proNameGV,barcodeGV,expiryGV,priceGV,catGV,quantityGV,finalGV,StatusGV);
+            r.showStockDetails(dataGridView1,proIDGV,proNameGV,barcodeGV,expiryGV,buyingPriceGV,sellingPriceGV,catGV,quantityGV,finalGV,StatusGV);
         }
     }
 }

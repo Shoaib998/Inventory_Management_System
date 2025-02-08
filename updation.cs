@@ -36,7 +36,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void updateCat(int id,string name, Int16 status)
+        public void updateCat(int id, string name, Int16 status)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void updateProduct(int proID, string product, string barcode, int catID, DateTime? expiry=null)
+        public void updateProduct(int proID, string product, string barcode, int catID, DateTime? expiry = null)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace IMS
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@name", product);
                 cmd.Parameters.AddWithValue("@barcode", barcode);
-                
+
                 if (expiry == null)
                 {
                     cmd.Parameters.AddWithValue("@expiry", DBNull.Value);
@@ -134,6 +134,40 @@ namespace IMS
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@proID", proID);
                 cmd.Parameters.AddWithValue("@quan", proquan);
+
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+
+            }
+            catch (Exception)
+            {
+
+                MainClass.con.Close();
+            }
+        }
+        public void updateProductPrice(int proID, float bp, float sp = 0, float dis = 0, float profitPerc = 0)
+        {
+            try
+            {
+                SqlCommand cmd;
+                if (sp == 0 && dis == 0 && profitPerc == 0)
+                {
+                    cmd = new SqlCommand("st_updateProductPrice1", MainClass.con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@proID", proID);
+                    cmd.Parameters.AddWithValue("@bp", bp);
+                }
+                else
+                {
+                    cmd = new SqlCommand("st_updateProductPrice", MainClass.con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@proID", proID);
+                    cmd.Parameters.AddWithValue("@bp", bp);
+                    cmd.Parameters.AddWithValue("@sp", sp);
+                    cmd.Parameters.AddWithValue("@dis", dis);
+                    cmd.Parameters.AddWithValue("@profPer", profitPerc);
+                }        
 
                 MainClass.con.Open();
                 cmd.ExecuteNonQuery();

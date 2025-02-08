@@ -15,6 +15,7 @@ namespace IMS
     {
         retrieval r = new retrieval();
         Regex rg = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+        updation u = new updation();
         public ProductPricing()
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace IMS
         {
             if (categoryDD.SelectedIndex != -1 && categoryDD.SelectedIndex != 0)
             {
-                r.showProductWRTCategory(Convert.ToInt32(categoryDD.SelectedValue.ToString()), dataGridView1, proIDGV, proNameGV, buyingPriceGV);
+                r.showProductWRTCategory(Convert.ToInt32(categoryDD.SelectedValue.ToString()), dataGridView1, proIDGV, proNameGV, buyingPriceGV, finalPriceGV, discountGV, profitMarginGV);
             }
         }
 
@@ -72,6 +73,73 @@ namespace IMS
              dataGridView1.BeginEdit(true);
           }
    
+        }
+
+        public override void addBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public override void editBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public override void saveBtn_Click(object sender, EventArgs e)
+        {
+            if (categoryDD.SelectedIndex != -1 && categoryDD.SelectedIndex != 0)
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if ((bool)row.Cells["selectGV"].FormattedValue == true)
+                    {
+                        float discount, profitMargin, buyingPrice, sellingPrice;
+                        int proID;
+                        proID = Convert.ToInt32(row.Cells["proIDGV"].Value.ToString());
+                        buyingPrice = Convert.ToSingle(row.Cells["buyingPriceGV"].Value.ToString());
+                        
+                        discount = row.Cells["discountGV"].Value == null ? 0 : Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
+                        profitMargin = row.Cells["profitMarginGV"].Value == null ? 0 : Convert.ToSingle(row.Cells["profitMarginGV"].Value.ToString());
+                        if (discount == 0 && profitMargin == 0)
+                        {
+                            sellingPrice = buyingPrice;
+                        }
+                        else
+                        {
+                            sellingPrice = Convert.ToSingle(row.Cells["finalPriceGV"].Value.ToString());
+                        }
+
+                        u.updateProductPrice(proID, buyingPrice, sellingPrice,discount, profitMargin);
+                        
+                    }
+                }
+                MainClass.ShowMSG("Product Pricing Updated Successfully...", "Success", "Success");
+            }
+        }
+
+        public override void deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public override void searchTB_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public override void viewBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductPricing_Load(object sender, EventArgs e)
+        {
+            dataGridView1.AutoGenerateColumns = false;
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

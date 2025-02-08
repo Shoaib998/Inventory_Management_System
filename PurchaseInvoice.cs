@@ -46,7 +46,15 @@ namespace IMS
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         co += i.insertPurchaseInvoiceDetails(purchaseInvoiceID, Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()), Convert.ToSingle(row.Cells["totalGV"].Value.ToString()));
-                        i.insertProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
+                        if (r.checkProductPriceExistance(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString())))
+                        {
+                            u.updateProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
+                        }
+                        else
+                        {
+                            i.insertProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
+                        }
+                        
                         int q;
                         object ob = r.getProductQuantity(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()));
                         if (ob != null)
