@@ -56,7 +56,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void updateProduct(int proID, string product, string barcode, int catID, DateTime? expiry = null)
+        public void updateProduct(Int64 proID, string product, string barcode, int catID, DateTime? expiry = null)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace IMS
                 MainClass.ShowMSG(ex.Message, "Error...", "Error");
             }
         }
-        public void updateStock(int proID, int proquan)
+        public void updateStock(Int64 proID, int proquan)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace IMS
                 MainClass.con.Close();
             }
         }
-        public void updateProductPrice(int proID, float bp, float sp = 0, float dis = 0, float profitPerc = 0)
+        public void updateProductPrice(Int64 proID, float bp, float sp = 0, float dis = 0, float profitPerc = 0)
         {
             try
             {
@@ -177,6 +177,23 @@ namespace IMS
             catch (Exception)
             {
 
+                MainClass.con.Close();
+            }
+        }
+        public void updateStockWithoutConnection(Int64 proID, int proquan)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_updatetStock", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@quan", proquan);
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
                 MainClass.con.Close();
             }
         }

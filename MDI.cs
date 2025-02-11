@@ -53,7 +53,7 @@ namespace IMS
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MDI.logoutToolStripMenuItem.Enabled = false;
+            this.logoutToolStripMenuItem.Enabled = false;
             login lgin = new login();
             MainClass.showWindow(lgin, this);
         

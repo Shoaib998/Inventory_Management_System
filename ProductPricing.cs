@@ -40,17 +40,19 @@ namespace IMS
                     float buyingPrice = Convert.ToSingle(row.Cells["buyingPriceGV"].Value.ToString());
                     float profitMargin = Convert.ToSingle(row.Cells["profitMarginGV"].Value.ToString()) / 100;
                     float amountToIncrease = profitMargin * buyingPrice;
+                   
+                    float finalSellingPrice = buyingPrice + amountToIncrease;
                     float discountPercentage;
+
                     if (row.Cells["discountGV"].Value != null && rg.Match(row.Cells["discountGV"].Value.ToString()).Success)
                     {
-                        discountPercentage = buyingPrice * (Convert.ToSingle(row.Cells["discountGV"].Value.ToString())/100);
+                        discountPercentage = finalSellingPrice * (Convert.ToSingle(row.Cells["discountGV"].Value.ToString()) / 100);
                     }
                     else
                     {
                         discountPercentage = 0;
                     }
-                    float finalSellingPrice = buyingPrice + amountToIncrease - discountPercentage;
-                    row.Cells["finalPriceGV"].Value = finalSellingPrice;
+                    row.Cells["finalPriceGV"].Value = finalSellingPrice - discountPercentage;
                 }
                 else
                 {
@@ -87,14 +89,16 @@ namespace IMS
 
         public override void saveBtn_Click(object sender, EventArgs e)
         {
+            int check = 0;
             if (categoryDD.SelectedIndex != -1 && categoryDD.SelectedIndex != 0)
             {
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if ((bool)row.Cells["selectGV"].FormattedValue == true)
                     {
+                        check++;
                         float discount, profitMargin, buyingPrice, sellingPrice;
-                        int proID;
+                        Int64 proID;
                         proID = Convert.ToInt32(row.Cells["proIDGV"].Value.ToString());
                         buyingPrice = Convert.ToSingle(row.Cells["buyingPriceGV"].Value.ToString());
                         
@@ -113,7 +117,16 @@ namespace IMS
                         
                     }
                 }
-                MainClass.ShowMSG("Product Pricing Updated Successfully...", "Success", "Success");
+                if (check > 0)
+                {
+                    MainClass.ShowMSG("Product Pricing Updated Successfully...", "Success", "Success");
+                    check = 0;
+                }
+                else
+                {
+                    MainClass.ShowMSG("Please select any product first...", "Error", "Error");
+                    check = 0;
+                } 
             }
         }
 

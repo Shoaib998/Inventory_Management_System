@@ -233,7 +233,7 @@ namespace IMS
                 MainClass.ShowMSG("Unable to load Suppliers data", "Error", "Error");
             }
         }
-        private string[] productsData = new string[3];
+        private string[] productsData = new string[6];
         public string[] getProductsWRTBarcode(string barcode)
         {
             try
@@ -247,14 +247,17 @@ namespace IMS
                 {
                     while (dr.Read())
                     {
-                        productsData[0] = dr[0].ToString();
-                        productsData[1] = dr[1].ToString();
-                        productsData[2] = dr[2].ToString();
+                        productsData[0] = dr[0].ToString(); //product ID
+                        productsData[1] = dr[1].ToString(); //product
+                        productsData[2] = dr[2].ToString(); //barcode
+                        productsData[3] = dr[3].ToString(); // selling price
+                        productsData[4] = dr[4].ToString(); // discount
+                        productsData[5] = dr[5].ToString(); //final selling price
                     }
                 }
                 else
                 {
-                    //MainClass.ShowMSG("No product Available.", "Error", "Error");
+                    Array.Clear(productsData,0, productsData.Length);
                 }
                 MainClass.con.Close();
             }
@@ -266,7 +269,7 @@ namespace IMS
             return productsData;
         }
         private object productStockCount = 0;
-        public object getProductQuantity(int proID)
+        public object getProductQuantity(Int64 proID)
         {
             try
             {
@@ -280,7 +283,6 @@ namespace IMS
             }
             catch (Exception)
             {
-
                
             }
             return productStockCount;
@@ -362,7 +364,7 @@ namespace IMS
             }
         }
         private bool checkPPExistance;
-        public bool checkProductPriceExistance(int proID)
+        public bool checkProductPriceExistance(Int64 proID)
         {
             try
             {
@@ -386,6 +388,22 @@ namespace IMS
 
             }
             return checkPPExistance;
+        }
+        public object getProductQuantityWithoutConnection(Int64 proID)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_getProductQuantity", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@proID", proID);
+
+                productStockCount = cmd.ExecuteScalar();
+            }
+            catch (Exception)
+            {
+
+            }
+            return productStockCount;
         }
     }
 }

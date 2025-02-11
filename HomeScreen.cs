@@ -37,7 +37,8 @@ namespace IMS
 
         private void HomeScreen_Load(object sender, EventArgs e)
         {
-            MDI.logoutToolStripMenuItem.Enabled = true;
+            MDI m = new MDI();
+            m.logoutToolStripMenuItem.Enabled = true;
             userLbl.Text = retrieval.EMP_NAME;       
         }
 

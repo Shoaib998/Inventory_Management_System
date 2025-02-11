@@ -15,7 +15,7 @@ namespace IMS
     public partial class products : Sample2
     {
         int edit = 0; //This 0 is an andication to save operation and 1 is andication to update operstion
-        int prodID;
+        Int64 prodID;
         public products()
         {
             InitializeComponent();
