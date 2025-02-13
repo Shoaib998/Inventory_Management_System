@@ -31,6 +31,11 @@ namespace IMS
         {
           
         }
+        public override void viewBtn_Click(object sender, EventArgs e)
+        {
+            viewSalesInvoices vsi = new viewSalesInvoices();
+            MainClass.showWindow(vsi, this, MDI.ActiveForm);
+        }
         bool productCheck;
         private void barcodeTB_Validating(object sender, CancelEventArgs e)
         {
@@ -108,7 +113,7 @@ namespace IMS
                     {
                         GROSS += Convert.ToSingle(row.Cells["totalGV"].Value.ToString());
                     }
-                    grossamountLbl.Text = Math.Round(GROSS,0).ToString();
+                    grossamountLbl.Text = Math.Ceiling(GROSS).ToString();
                     GROSS = 0;
                     barcodeTB.Focus();
                     barcodeTB.Text = "";
@@ -137,7 +142,7 @@ namespace IMS
 
                         // Update Gross Total
                         gt = Convert.ToSingle(grossamountLbl.Text) - itemTotal;
-                        grossamountLbl.Text = Math.Round( gt,0).ToString();
+                        grossamountLbl.Text = Math.Ceiling(gt).ToString();
 
                         // Update Discount Total
                         float currentDiscount = string.IsNullOrWhiteSpace(totalDiscountTB.Text) ? 0 : Convert.ToSingle(totalDiscountTB.Text);
@@ -174,7 +179,7 @@ namespace IMS
                         {
                             GROSS += Convert.ToSingle(item.Cells["totalGV"].Value.ToString());
                         }
-                        grossamountLbl.Text = Math.Round(GROSS, 0).ToString();
+                        grossamountLbl.Text = Math.Ceiling(GROSS).ToString();
                         GROSS = 0;
 
                         //ye youtube wala code 18 no.video hai upder wala gpt
@@ -205,8 +210,8 @@ namespace IMS
                     dis += Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
                     gross += Convert.ToSingle(row.Cells["totalGV"].Value.ToString());
                 }
-                totalDiscountTB.Text = Math.Round( dis,0).ToString();
-                grossTotalTB.Text = Math.Round (gross,0).ToString();
+                totalDiscountTB.Text = Math.Ceiling(dis).ToString();
+                grossTotalTB.Text = Math.Ceiling(gross).ToString();
             }
         }
 
@@ -244,7 +249,7 @@ namespace IMS
                 {
                     float amountGiven = Convert.ToSingle(amountGivenTB.Text);
                     float amounttoreturn = amountGiven - Convert.ToSingle(grossTotalTB.Text);
-                    changeToGiveTB.Text = Math.Round (amounttoreturn,0).ToString();
+                    changeToGiveTB.Text = Math.Ceiling(amounttoreturn).ToString();
                 }
             }
         }
@@ -260,6 +265,8 @@ namespace IMS
                     MainClass.enable_reset(paymentGB);
                     dataGridView1.Rows.Clear();
                     grossamountLbl.Text = "0.00";
+                    SalesReport sr = new SalesReport();
+                    sr.Show();
                 }
                 
             }

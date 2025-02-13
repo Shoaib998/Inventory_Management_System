@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Windows.Forms;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -404,6 +406,53 @@ namespace IMS
 
             }
             return productStockCount;
+        }
+        public void showReport(ReportDocument rd,CrystalReportViewer crv,string proc, string param1, object val1)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand(proc, MainClass.con);
+                cmd.CommandType= CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue(param1 , val1);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                rd.Load(Application.StartupPath+"\\Reports\\salesReceipt.rpt");
+                rd.SetDataSource(dt);
+                crv.ReportSource = rd;
+                crv.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+
+                MainClass.ShowMSG(ex.Message, "Error", "Error");
+            }
+        }
+        public void showDailySales(DateTime date,DataGridView gv, DataGridViewColumn saleIDGV, DataGridViewColumn UserGV, DataGridViewColumn totAmountGV, DataGridViewColumn totDiscountGV, DataGridViewColumn amountGivenGV, DataGridViewColumn amountReturnedGV, DataGridViewColumn userIDGV)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_getDailySales", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@date", date);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                saleIDGV.DataPropertyName = dt.Columns["Sales ID"].ToString();
+                UserGV.DataPropertyName = dt.Columns["User"].ToString();
+                totAmountGV.DataPropertyName = dt.Columns["Total Amount"].ToString();
+                totDiscountGV.DataPropertyName = dt.Columns["Total Discount"].ToString();
+                amountGivenGV.DataPropertyName = dt.Columns["Given Amount"].ToString();
+                amountReturnedGV.DataPropertyName = dt.Columns["Returned Amount"].ToString();
+                userIDGV.DataPropertyName = dt.Columns["User ID"].ToString();
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load sales data", "Error", "Error");
+            }
         }
     }
 }

@@ -271,7 +271,7 @@
             this.payBtn.Location = new System.Drawing.Point(6, 322);
             this.payBtn.Name = "payBtn";
             this.payBtn.Size = new System.Drawing.Size(235, 74);
-            this.payBtn.TabIndex = 3;
+            this.payBtn.TabIndex = 13;
             this.payBtn.Text = "&PAY";
             this.payBtn.UseVisualStyleBackColor = false;
             this.payBtn.Click += new System.EventHandler(this.payBtn_Click);
@@ -308,7 +308,7 @@
             this.checkOutBtn.Location = new System.Drawing.Point(6, 242);
             this.checkOutBtn.Name = "checkOutBtn";
             this.checkOutBtn.Size = new System.Drawing.Size(235, 74);
-            this.checkOutBtn.TabIndex = 13;
+            this.checkOutBtn.TabIndex = 14;
             this.checkOutBtn.Text = "&CHECKOUT";
             this.checkOutBtn.UseVisualStyleBackColor = false;
             this.checkOutBtn.Click += new System.EventHandler(this.checkOutBtn_Click);
