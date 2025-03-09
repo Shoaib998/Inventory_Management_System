@@ -24,11 +24,11 @@ namespace IMS
             rd = new ReportDocument();
             if (viewSalesInvoices.salesID == 0)
             {
-                r.showReport(rd, crystalReportViewer2, "st_getSalesReceipt", "@user", retrieval.USER_ID);
+                r.showReport("salesReceipt.rpt", rd, crystalReportViewer2, "st_getSalesReceipt", "@user", retrieval.USER_ID);
             }
             else
             {
-                r.showReport(rd, crystalReportViewer2, "st_getSalesReceiptWRTSalesID", "@salesID", viewSalesInvoices.salesID);
+                r.showReport("salesReceipt.rpt", rd, crystalReportViewer2, "st_getSalesReceiptWRTSalesID", "@salesID", viewSalesInvoices.salesID);
                 viewSalesInvoices.salesID = 0;
             }
            

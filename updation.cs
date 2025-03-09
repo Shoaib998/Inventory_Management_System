@@ -197,5 +197,23 @@ namespace IMS
                 MainClass.con.Close();
             }
         }
+        public void updateSalesQuantity(Int64 SalesId, Int16 quantity)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_updateQuantityInSalesDetails", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@salID", SalesId);
+                cmd.Parameters.AddWithValue("@quan", quantity);
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+            }
+            catch (Exception ex)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG(ex.Message, "Error...", "Error");
+            }
+        }
     }
 }

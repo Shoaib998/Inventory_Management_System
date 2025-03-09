@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.productPricingBtn = new System.Windows.Forms.Button();
             this.supplierBtn = new System.Windows.Forms.Button();
             this.categoryBtn = new System.Windows.Forms.Button();
             this.salesBtn = new System.Windows.Forms.Button();
@@ -36,7 +37,7 @@
             this.stockBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.userBtn = new System.Windows.Forms.Button();
-            this.productPricingBtn = new System.Windows.Forms.Button();
+            this.salesReturnBtn = new System.Windows.Forms.Button();
             this.leftPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -60,6 +61,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.salesReturnBtn, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.productPricingBtn, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.supplierBtn, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.categoryBtn, 0, 1);
@@ -79,6 +81,22 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 481);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // productPricingBtn
+            // 
+            this.productPricingBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.productPricingBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productPricingBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.productPricingBtn.FlatAppearance.BorderSize = 2;
+            this.productPricingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.productPricingBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productPricingBtn.Location = new System.Drawing.Point(311, 99);
+            this.productPricingBtn.Name = "productPricingBtn";
+            this.productPricingBtn.Size = new System.Drawing.Size(148, 90);
+            this.productPricingBtn.TabIndex = 7;
+            this.productPricingBtn.Text = "Product Pricing";
+            this.productPricingBtn.UseVisualStyleBackColor = true;
+            this.productPricingBtn.Click += new System.EventHandler(this.productPricingBtn_Click);
             // 
             // supplierBtn
             // 
@@ -192,21 +210,21 @@
             this.userBtn.UseVisualStyleBackColor = true;
             this.userBtn.Click += new System.EventHandler(this.userBtn_Click);
             // 
-            // productPricingBtn
+            // salesReturnBtn
             // 
-            this.productPricingBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.productPricingBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productPricingBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.productPricingBtn.FlatAppearance.BorderSize = 2;
-            this.productPricingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.productPricingBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productPricingBtn.Location = new System.Drawing.Point(311, 99);
-            this.productPricingBtn.Name = "productPricingBtn";
-            this.productPricingBtn.Size = new System.Drawing.Size(148, 90);
-            this.productPricingBtn.TabIndex = 7;
-            this.productPricingBtn.Text = "Product Pricing";
-            this.productPricingBtn.UseVisualStyleBackColor = true;
-            this.productPricingBtn.Click += new System.EventHandler(this.productPricingBtn_Click);
+            this.salesReturnBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.salesReturnBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.salesReturnBtn.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.salesReturnBtn.FlatAppearance.BorderSize = 2;
+            this.salesReturnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.salesReturnBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salesReturnBtn.Location = new System.Drawing.Point(465, 99);
+            this.salesReturnBtn.Name = "salesReturnBtn";
+            this.salesReturnBtn.Size = new System.Drawing.Size(148, 90);
+            this.salesReturnBtn.TabIndex = 8;
+            this.salesReturnBtn.Text = "Sales Return";
+            this.salesReturnBtn.UseVisualStyleBackColor = true;
+            this.salesReturnBtn.Click += new System.EventHandler(this.salesReturnBtn_Click);
             // 
             // HomeScreen
             // 
@@ -234,5 +252,6 @@
         private System.Windows.Forms.Button categoryBtn;
         private System.Windows.Forms.Button supplierBtn;
         private System.Windows.Forms.Button productPricingBtn;
+        private System.Windows.Forms.Button salesReturnBtn;
     }
 }

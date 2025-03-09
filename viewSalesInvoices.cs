@@ -20,6 +20,13 @@ namespace IMS
         private void loadBtn_Click(object sender, EventArgs e)
         {
             r.showDailySales(dateTimePicker1.Value, dataGridView1, saleIDGV, UserGV, totAmtGV, totDisGV, amtGivenGV, amtReturnedGV,userIDGV);
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Cells["totAmtGV"].Value = Math.Ceiling(Convert.ToSingle(row.Cells["totAmtGV"].Value));
+                row.Cells["totDisGV"].Value = Math.Ceiling(Convert.ToSingle(row.Cells["totDisGV"].Value));
+                row.Cells["amtGivenGV"].Value = Math.Ceiling(Convert.ToSingle(row.Cells["amtGivenGV"].Value));
+                row.Cells["amtReturnedGV"].Value = Math.Ceiling(Convert.ToSingle(row.Cells["amtReturnedGV"].Value));
+            }
         }
 
         private void backBtn_Click(object sender, EventArgs e)

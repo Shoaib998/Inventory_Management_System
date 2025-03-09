@@ -32,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -120,6 +124,18 @@
     <Compile Include="Sales.Designer.cs">
       <DependentUpon>Sales.cs</DependentUpon>
     </Compile>
+    <Compile Include="SalesReturnReceiptWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesReturnReceiptWindow.Designer.cs">
+      <DependentUpon>SalesReturnReceiptWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesReturnWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesReturnWindow.Designer.cs">
+      <DependentUpon>SalesReturnWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sample.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales.resx">
       <DependentUpon>Sales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesReturnReceiptWindow.resx">
+      <DependentUpon>SalesReturnReceiptWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesReturnWindow.resx">
+      <DependentUpon>SalesReturnWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sample.resx">
       <DependentUpon>Sample.cs</DependentUpon>

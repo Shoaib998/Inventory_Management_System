@@ -366,7 +366,8 @@ namespace IMS
             }
         }
         private bool checkPPExistance;
-        public bool checkProductPriceExistance(Int64 proID)
+        private object[] productPriceDetails = new object[5];
+        public object[] checkProductPriceExistance(Int64 proID)
         {
             try
             {
@@ -377,11 +378,18 @@ namespace IMS
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    checkPPExistance = true;
+                    while (dr.Read())
+                    {
+                        productPriceDetails[0] = dr[0].ToString(); //proID
+                        productPriceDetails[1] = dr[1].ToString(); //bp
+                        productPriceDetails[2] = dr[2].ToString(); //sp
+                        productPriceDetails[3] = dr[3].ToString(); //dispercentage
+                        productPriceDetails[4] = dr[4].ToString(); //profitPercentage
+                    }
                 }
                 else
                 {
-                    checkPPExistance = false;
+                    Array.Clear(productPriceDetails, 0, productPriceDetails.Length);
                 }
                 MainClass.con.Close();
             }
@@ -389,7 +397,7 @@ namespace IMS
             {
 
             }
-            return checkPPExistance;
+            return productPriceDetails;
         }
         public object getProductQuantityWithoutConnection(Int64 proID)
         {
@@ -407,17 +415,25 @@ namespace IMS
             }
             return productStockCount;
         }
-        public void showReport(ReportDocument rd,CrystalReportViewer crv,string proc, string param1, object val1)
+        public void showReport(string reportName,ReportDocument rd,CrystalReportViewer crv,string proc, string param1= null, object val1=null)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand(proc, MainClass.con);
                 cmd.CommandType= CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue(param1 , val1);
+                if (param1 != null && val1 != null)
+                {
+                    cmd.Parameters.AddWithValue(param1, val1);
+                }
+                else
+                {
+
+                }
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                rd.Load(Application.StartupPath+"\\Reports\\salesReceipt.rpt");
+                rd.Load(Application.StartupPath+ "\\Reports\\" + reportName); 
                 rd.SetDataSource(dt);
                 crv.ReportSource = rd;
                 crv.RefreshReport();
@@ -447,6 +463,44 @@ namespace IMS
                 amountGivenGV.DataPropertyName = dt.Columns["Given Amount"].ToString();
                 amountReturnedGV.DataPropertyName = dt.Columns["Returned Amount"].ToString();
                 userIDGV.DataPropertyName = dt.Columns["User ID"].ToString();
+                gv.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MainClass.ShowMSG("Unable to load sales data", "Error", "Error");
+            }
+        }
+        public void showSalesDataViaID(Int64 salesID,DataGridView gv, DataGridViewColumn salesIDGV, DataGridViewColumn barcodeGV, 
+            DataGridViewColumn productGV, DataGridViewColumn quantityGV, DataGridViewColumn perProDisGV, DataGridViewColumn perProTotalGV,
+            DataGridViewColumn totalDisGV, DataGridViewColumn totAmountGV, DataGridViewColumn givenAmountGV, DataGridViewColumn returnedAmountGV,
+            DataGridViewColumn dateGV, DataGridViewColumn proPriceGV, DataGridViewColumn userGV, DataGridViewColumn paymentMethodGV, DataGridViewColumn proIDGV, DataGridViewColumn productDiscount)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand("st_getSalesReceiptWRTSalesID", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@salesID", salesID);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                salesIDGV.DataPropertyName = dt.Columns["Sales ID"].ToString();
+                barcodeGV.DataPropertyName = dt.Columns["Barcode"].ToString();
+                productGV.DataPropertyName = dt.Columns["Product Name"].ToString();
+                quantityGV.DataPropertyName = dt.Columns["Quantity"].ToString();
+                proPriceGV.DataPropertyName = dt.Columns["Product Price"].ToString();
+                perProDisGV.DataPropertyName = dt.Columns["Per Product Discount"].ToString();
+                perProTotalGV.DataPropertyName = dt.Columns["Per Product Total"].ToString();
+                totalDisGV.DataPropertyName = dt.Columns["Total Discount"].ToString();
+                totAmountGV.DataPropertyName = dt.Columns["Total Amount"].ToString();
+                givenAmountGV.DataPropertyName = dt.Columns["Given Amount"].ToString();
+                returnedAmountGV.DataPropertyName = dt.Columns["Returned Amount"].ToString();
+                dateGV.DataPropertyName = dt.Columns["Date"].ToString();
+                userGV.DataPropertyName = dt.Columns["User"].ToString();
+                paymentMethodGV.DataPropertyName = dt.Columns["Pay Type"].ToString();
+                proIDGV.DataPropertyName = dt.Columns["Product ID"].ToString();
+                productDiscount.DataPropertyName = dt.Columns["Product Discount"].ToString();
                 gv.DataSource = dt;
             }
             catch (Exception)

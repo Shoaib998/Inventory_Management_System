@@ -71,5 +71,11 @@ namespace IMS
             ProductPricing pp = new ProductPricing();
             MainClass.showWindow(pp, this, MDI.ActiveForm);
         }
+
+        private void salesReturnBtn_Click(object sender, EventArgs e)
+        {
+            SalesReturnWindow srw = new SalesReturnWindow();
+            MainClass.showWindow(srw, this, MDI.ActiveForm);
+        }
     }
 }

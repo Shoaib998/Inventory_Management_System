@@ -239,7 +239,7 @@ namespace IMS
         Int64 salesID;
         retrieval r = new retrieval();
         updation u = new updation();
-        public void insertSales(DataGridView gv,string proIDGV,string proQuanGV,int doneBy, DateTime dt, float totAmt, float totDis, float amtGiven, float amtReturned,string payType)
+        public void insertSales(DataGridView gv,string proIDGV,string proQuanGV,string perUnitPriceGV,string discGV,int doneBy, DateTime dt, float totAmt, float totDis, float amtGiven, float amtReturned,string payType)
         {
             try
             {
@@ -279,6 +279,8 @@ namespace IMS
                             cmd2.Parameters.AddWithValue("@salID", salesID);
                             cmd2.Parameters.AddWithValue("@proID", Convert.ToInt64(row.Cells[proIDGV].Value.ToString()));
                             cmd2.Parameters.AddWithValue("@quan", Convert.ToInt32(row.Cells[proQuanGV].Value.ToString()));
+                            cmd2.Parameters.AddWithValue("@sellingPrice", Convert.ToInt32(row.Cells[perUnitPriceGV].Value.ToString()));
+                            cmd2.Parameters.AddWithValue("@discount", Convert.ToInt32(row.Cells[discGV].Value.ToString()));
                             cmd2.ExecuteNonQuery();
                             int stockofProduct = Convert.ToInt32( r.getProductQuantityWithoutConnection(Convert.ToInt64(row.Cells[proIDGV].Value.ToString())));
                             int currentQuanofProduct = Convert.ToInt32(row.Cells[proQuanGV].Value.ToString());
@@ -296,6 +298,31 @@ namespace IMS
 
                 MainClass.con.Close();
             }
+        }
+        int refundReturn = 0;
+        public int insertRefundReturn(Int64 salesID, DateTime date, int doneBy, Int64 proID, Int16 quantity, float amount)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("st_insertRefundsReturns", MainClass.con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@salesID", salesID);
+                cmd.Parameters.AddWithValue("@date", date);
+                cmd.Parameters.AddWithValue("@doneBy", doneBy);
+                cmd.Parameters.AddWithValue("@proID", proID);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@amount", amount);
+
+                MainClass.con.Open();
+                cmd.ExecuteNonQuery();
+                MainClass.con.Close();
+            }
+            catch (Exception ex)
+            {
+                MainClass.con.Close();
+                MainClass.ShowMSG(ex.Message, "Error...", "Error");
+            }
+            return refundReturn;
         }
     }
 }

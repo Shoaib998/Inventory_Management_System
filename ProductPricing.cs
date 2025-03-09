@@ -100,8 +100,8 @@ namespace IMS
                         float discount, profitMargin, buyingPrice, sellingPrice;
                         Int64 proID;
                         proID = Convert.ToInt32(row.Cells["proIDGV"].Value.ToString());
+                        object[] arr = r.checkProductPriceExistance(proID);
                         buyingPrice = Convert.ToSingle(row.Cells["buyingPriceGV"].Value.ToString());
-                        
                         discount = row.Cells["discountGV"].Value == null ? 0 : Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
                         profitMargin = row.Cells["profitMarginGV"].Value == null ? 0 : Convert.ToSingle(row.Cells["profitMarginGV"].Value.ToString());
                         if (discount == 0 && profitMargin == 0)
@@ -112,9 +112,11 @@ namespace IMS
                         {
                             sellingPrice = Convert.ToSingle(row.Cells["finalPriceGV"].Value.ToString());
                         }
-
-                        u.updateProductPrice(proID, buyingPrice, sellingPrice,discount, profitMargin);
-                        
+                        if (arr.Length > 0)
+                        {
+                            u.updateProductPrice(proID, buyingPrice, sellingPrice, discount, profitMargin);
+                        }
+                       // u.updateProductPrice(proID, buyingPrice, sellingPrice,discount, profitMargin);    ye yahan tha me isko uper likh raha hun check krny k leye                   
                     }
                 }
                 if (check > 0)

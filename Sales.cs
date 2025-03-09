@@ -65,7 +65,7 @@ namespace IMS
                 {
                     if (dataGridView1.Rows.Count == 0)
                     {
-                        dataGridView1.Rows.Add(Convert.ToInt32(prodARR[0]), prodARR[1], 1, Convert.ToSingle(prodARR[3]), prodARR[4], Convert.ToSingle(prodARR[5]));
+                        dataGridView1.Rows.Add(Convert.ToInt32(prodARR[0]), prodARR[1], 1, Convert.ToSingle(prodARR[3]), Math.Round(Convert.ToSingle( prodARR[4]),2), Convert.ToSingle(prodARR[3]));
                     }
                     else
                     {
@@ -75,7 +75,6 @@ namespace IMS
                             {
                                 productCheck = true;
                                 break;
-
                             }
                             else
                             {
@@ -94,10 +93,10 @@ namespace IMS
                                     row.Cells["quantityGV"].Value = Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()) + 1;
                                     if (row.Cells["discountGV"].Value.ToString() != null)
                                     {
-                                        disc = Convert.ToSingle(row.Cells["discountGV"].Value.ToString()) + Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
-                                        row.Cells["discountGV"].Value = disc;
+                                        disc = Convert.ToSingle(prodARR[4]) * Convert.ToSingle(row.Cells["quantityGV"].Value.ToString());
+                                        row.Cells["discountGV"].Value = Math.Round( disc,2);
                                     }
-                                    float tot = (Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()) * Convert.ToInt32(row.Cells["quantityGV"].Value.ToString())) - Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
+                                    float tot = (Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()) * Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()));
                                     row.Cells["totalGV"].Value = tot;
                                 }
 
@@ -105,7 +104,7 @@ namespace IMS
                         }
                         else
                         {
-                            dataGridView1.Rows.Add(Convert.ToInt32(prodARR[0]), prodARR[1], 1, Convert.ToSingle(prodARR[3]), prodARR[4], Convert.ToSingle(prodARR[5]));
+                            dataGridView1.Rows.Add(Convert.ToInt32(prodARR[0]), prodARR[1], 1, Convert.ToSingle(prodARR[3]), Math.Round(Convert.ToSingle(prodARR[4]), 2), Convert.ToSingle(prodARR[3]));
                         }
                     }
 
@@ -113,7 +112,7 @@ namespace IMS
                     {
                         GROSS += Convert.ToSingle(row.Cells["totalGV"].Value.ToString());
                     }
-                    grossamountLbl.Text = Math.Ceiling(GROSS).ToString();
+                    grossamountLbl.Text = Math.Round(GROSS,2).ToString();
                     GROSS = 0;
                     barcodeTB.Focus();
                     barcodeTB.Text = "";
@@ -148,7 +147,7 @@ namespace IMS
                         float currentDiscount = string.IsNullOrWhiteSpace(totalDiscountTB.Text) ? 0 : Convert.ToSingle(totalDiscountTB.Text);
 
                         currentDiscount -= itemDiscount;
-                        //totalDiscountTB.Text = currentDiscount.ToString();
+                        totalDiscountTB.Text = currentDiscount.ToString();
 
                         dataGridView1.Rows.Remove(row);
                         
@@ -171,7 +170,7 @@ namespace IMS
                         row.Cells["discountGV"].Value = dis;
 
                         // Calculate new total
-                        tot = (Convert.ToSingle(row.Cells["quantityGV"].Value.ToString()) * Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString())) - dis;
+                        tot = (Convert.ToSingle(row.Cells["quantityGV"].Value.ToString()) * Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
                         row.Cells["totalGV"].Value = tot;
 
                         // Update Gross Amount
@@ -187,7 +186,7 @@ namespace IMS
                         //row.Cells["quantityGV"].Value = q;
                         //dis = Convert.ToSingle(row.Cells["discountGV"].Value.ToString()) - Convert.ToSingle(prodARR[4]);
                         //row.Cells["discountGV"].Value = dis;
-                        //tot = Convert.ToSingle(row.Cells["quantityGV"].Value.ToString()) * Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString())- dis;
+                        //tot = Convert.ToSingle(row.Cells["quantityGV"].Value.ToString()) * Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString());
                         //row.Cells["totalGV"].Value = tot;
                         //foreach (DataGridViewRow item in dataGridView1.Rows)
                         //{
@@ -204,14 +203,14 @@ namespace IMS
         {
             if (dataGridView1.Rows.Count > 0)
             {
-                float dis = 0, gross = 0;
+                double dis = 0, gross = 0;
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     dis += Convert.ToSingle(row.Cells["discountGV"].Value.ToString());
                     gross += Convert.ToSingle(row.Cells["totalGV"].Value.ToString());
                 }
-                totalDiscountTB.Text = Math.Ceiling(dis).ToString();
-                grossTotalTB.Text = Math.Ceiling(gross).ToString();
+                grossTotalTB.Text = Math.Round(gross, 0).ToString();
+                totalDiscountTB.Text = dis.ToString();
             }
         }
 
@@ -261,7 +260,7 @@ namespace IMS
                 DialogResult dr = MessageBox.Show("\n\t Total Amount : "+ grossTotalTB.Text+ "\n\t Total Discount : "+totalDiscountTB.Text+ "\n\t Amount Given : "+amountGivenTB.Text+ "\n\t Amount to Return :"+changeToGiveTB.Text+ "\n\n Are you sure, to Save Current Sales?\n", "Question...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    i.insertSales(dataGridView1, "proIDGV", "quantityGV", retrieval.USER_ID, DateTime.Now, Convert.ToSingle(grossTotalTB.Text), Convert.ToSingle(totalDiscountTB.Text), Convert.ToSingle(amountGivenTB.Text), Convert.ToSingle(changeToGiveTB.Text),paymnetTypeDD.SelectedItem.ToString());
+                    i.insertSales(dataGridView1, "proIDGV", "quantityGV", "perunitpriceGV", "discountGV", retrieval.USER_ID, DateTime.Now, Convert.ToSingle(grossTotalTB.Text), Convert.ToSingle(totalDiscountTB.Text), Convert.ToSingle(amountGivenTB.Text), Convert.ToSingle(changeToGiveTB.Text),paymnetTypeDD.SelectedItem.ToString());
                     MainClass.enable_reset(paymentGB);
                     dataGridView1.Rows.Clear();
                     grossamountLbl.Text = "0.00";

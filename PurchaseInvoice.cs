@@ -38,48 +38,52 @@ namespace IMS
             if(dataGridView1.Rows.Count >0)
             {
                 Int64 purchaseInvoiceID;
-                insertion i = new insertion();
-                using (TransactionScope sc = new TransactionScope())
-                {
-                    purchaseInvoiceID = i.insertPurchaseInvoice(DateTime.Today, retrieval.USER_ID, Convert.ToInt32(supplierDD.SelectedValue));
+               insertion i = new insertion();
+               using (TransactionScope sc = new TransactionScope())
+              {
+                  purchaseInvoiceID = i.insertPurchaseInvoice(DateTime.Today, retrieval.USER_ID, Convert.ToInt32(supplierDD.SelectedValue));
 
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        co += i.insertPurchaseInvoiceDetails(purchaseInvoiceID, Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()), Convert.ToSingle(row.Cells["totalGV"].Value.ToString()));
-                        if (r.checkProductPriceExistance(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString())))
-                        {
-                            u.updateProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
-                        }
-                        else
-                        {
-                            i.insertProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
-                        }
-                        
-                        int q;
-                        object ob = r.getProductQuantity(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()));
-                        if (ob != null)
-                        {
+                   foreach (DataGridViewRow row in dataGridView1.Rows)
+                   {
+                       co += i.insertPurchaseInvoiceDetails(purchaseInvoiceID, Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()), Convert.ToSingle(row.Cells["totalGV"].Value.ToString()));
+                       object[] arr = (object[])r.checkProductPriceExistance(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()));
+                       if (arr[3] != null)
+                       {
+                            float disPercentage = Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()) * Convert.ToSingle(arr[3].ToString())/100;
+                            float profitPercentage = Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()) * Convert.ToSingle(arr[4].ToString()) / 100;
+                            float totalAmount = Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()) + profitPercentage - disPercentage;
+                            u.updateProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()),totalAmount);
+                       }
+                       else
+                       {
+                           i.insertProductPrice(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToSingle(row.Cells["perunitpriceGV"].Value.ToString()));
+                       }
+
+                       int q;
+                       object ob = r.getProductQuantity(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()));
+                       if (ob != null)
+                       {
                             q = Convert.ToInt32(ob);
                             q += Convert.ToInt32(row.Cells["quantityGV"].Value.ToString());
                             u.updateStock(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), q);
-                        }
-                        else
+                       }
+                       else
                         {
-                            i.insertStock(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()));
-                        }
-                      
-                    }
-                    if (co > 0)
-                    {
-                        MainClass.ShowMSG("Purchase Invoice Created Successfully!", "Success", "Success");
-                    }
-                    else
-                    {
-                        MainClass.ShowMSG("Unable to create purchase Invoice!", "Error", "Error");
-                    }
-                    sc.Complete();
-                }
-              
+                           i.insertStock(Convert.ToInt32(row.Cells["proIDGV"].Value.ToString()), Convert.ToInt32(row.Cells["quantityGV"].Value.ToString()));
+                       }
+
+                   }
+                   if (co > 0)
+                   {
+                       MainClass.ShowMSG("Purchase Invoice Created Successfully!", "Success", "Success");
+                   }
+                  else
+                  {
+                      MainClass.ShowMSG("Unable to create purchase Invoice!", "Error", "Error");
+                  }
+                  sc.Complete();
+              }
+
             }
         }
 
